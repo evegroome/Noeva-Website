@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noeva Health — BDC Capital Life Sciences Venture Fund</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --teal: #1B8A8A;
+  --navy: #1B4A5E;
+  --coral: #E86B5A;
+  --coral-light: #F0907A;
+  --blue-mid: #2E7BA8;
+  --bg: #FFFFFF;
+  --bg-warm: #FBF9F7;
+  --bg-cool: #F4F8F8;
+  --text: #1B2A4A;
+  --text-sub: #5A6B7A;
+  --text-light: #8A95A5;
+  --gradient-teal: linear-gradient(135deg, #1B8A8A 0%, #2E7BA8 100%);
+  --gradient-warm: linear-gradient(135deg, #E86B5A 0%, #F0907A 100%);
+  --gradient-hero: linear-gradient(135deg, #1B4A5E 0%, #1B8A8A 40%, #2E7BA8 70%, #D4826A 90%, #E86B5A 100%);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  font-family: 'Poppins', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+  height: 100%; width: 100%;
+}
+
+/* ---- SLIDE ENGINE ---- */
+.deck { width: 100vw; height: 100vh; position: relative; }
+
+.slide {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  display: none; flex-direction: column;
+  padding: 56px 72px 64px;
+  overflow-y: auto;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.slide.active { display: flex; opacity: 1; }
+
+/* ---- SLIDE COUNTER ---- */
+.slide-counter {
+  position: fixed; bottom: 20px; right: 28px;
+  font-size: 12px; color: var(--text-light);
+  font-weight: 500; z-index: 200;
+  letter-spacing: 1px;
+}
+
+/* ---- NAV ARROWS ---- */
+.nav-arrows {
+  position: fixed; bottom: 18px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; gap: 8px; z-index: 200;
+}
+.nav-arrows button {
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 1.5px solid #D8DDE5; background: rgba(255,255,255,0.95);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s; color: var(--navy); font-size: 14px;
+}
+.nav-arrows button:hover { border-color: var(--teal); background: var(--bg-cool); }
+
+/* ---- PROGRESS BAR ---- */
+.progress-bar {
+  position: fixed; top: 0; left: 0; height: 3px;
+  background: var(--gradient-hero);
+  z-index: 300; transition: width 0.4s ease;
+}
+
+/* ---- HEADER LOGO (small icon) ---- */
+.header-logo {
+  position: absolute; top: 24px; left: 28px; z-index: 50;
+}
+
+/* ---- TYPOGRAPHY ---- */
+h1 { font-size: 44px; font-weight: 700; line-height: 1.15; letter-spacing: -0.5px; color: var(--navy); }
+h2 { font-size: 28px; font-weight: 600; line-height: 1.3; color: var(--navy); margin-bottom: 8px; }
+h3 { font-size: 18px; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+p, li { font-size: 15px; line-height: 1.65; color: var(--text-sub); }
+.subtitle { font-size: 17px; font-weight: 400; color: var(--text-sub); line-height: 1.6; }
+.label { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--teal); margin-bottom: 10px; }
+
+/* ---- BIG STATS ---- */
+.stat-mega { font-size: 56px; font-weight: 800; line-height: 1; letter-spacing: -1px; }
+.stat-large { font-size: 42px; font-weight: 700; line-height: 1.1; }
+.stat-med { font-size: 32px; font-weight: 700; line-height: 1.2; }
+.stat-label { font-size: 14px; font-weight: 500; color: var(--text-sub); margin-top: 4px; line-height: 1.4; }
+.stat-teal { color: var(--teal); }
+.stat-coral { color: var(--coral); }
+.stat-navy { color: var(--navy); }
+
+/* ---- CARDS ---- */
+.card {
+  background: var(--bg);
+  border: 1px solid #E8ECF0;
+  border-radius: 12px;
+  padding: 24px;
+  transition: box-shadow 0.2s;
+}
+.card:hover { box-shadow: 0 4px 20px rgba(27,74,94,0.08); }
+.card-teal { border-left: 3px solid var(--teal); }
+.card-coral { border-left: 3px solid var(--coral); }
+.card-navy { border-left: 3px solid var(--navy); }
+
+/* ---- GRIDS ---- */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+.grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 16px; }
+.flex-center { display: flex; align-items: center; justify-content: center; }
+.flex-col { display: flex; flex-direction: column; }
+.gap-8 { gap: 8px; } .gap-12 { gap: 12px; } .gap-16 { gap: 16px; } .gap-24 { gap: 24px; } .gap-32 { gap: 32px; }
+.mt-auto { margin-top: auto; }
+.mb-8 { margin-bottom: 8px; } .mb-16 { margin-bottom: 16px; } .mb-24 { margin-bottom: 24px; } .mb-32 { margin-bottom: 32px; }
+
+/* ---- TAGS / BADGES ---- */
+.badge {
+  display: inline-block; padding: 6px 16px; border-radius: 20px;
+  font-size: 15px; font-weight: 600; letter-spacing: 0.5px;
+}
+.badge-teal { background: rgba(27,138,138,0.1); color: var(--teal); }
+.badge-coral { background: rgba(232,107,90,0.1); color: var(--coral); }
+.badge-navy { background: rgba(27,74,94,0.1); color: var(--navy); }
+
+/* ---- FLOW ARROWS ---- */
+.flow-row { display: flex; align-items: center; gap: 0; flex-wrap: nowrap; }
+.flow-step {
+  flex: 1; padding: 14px 16px; text-align: center;
+  background: var(--bg-cool); border-radius: 10px;
+  font-size: 14px; font-weight: 500; color: var(--navy);
+  position: relative;
+}
+.flow-arrow {
+  width: 28px; text-align: center; color: var(--teal);
+  font-size: 18px; flex-shrink: 0; font-weight: 600;
+}
+
+/* ---- QUOTE ---- */
+.quote-block {
+  border-left: 4px solid var(--coral);
+  padding: 20px 28px;
+  background: rgba(232,107,90,0.04);
+  border-radius: 0 10px 10px 0;
+  font-style: italic;
+}
+.quote-block p { font-size: 22px; color: var(--navy); font-weight: 500; line-height: 1.5; }
+.quote-attr { font-size: 14px; color: var(--text-sub); font-style: normal; margin-top: 10px; font-weight: 400; }
+
+/* ---- TIMELINE ---- */
+.timeline { display: flex; flex-direction: column; gap: 0; position: relative; padding-left: 24px; }
+.timeline::before {
+  content: ''; position: absolute; left: 7px; top: 8px; bottom: 8px;
+  width: 2px; background: linear-gradient(to bottom, var(--teal), var(--coral));
+}
+.timeline-item { display: flex; align-items: flex-start; gap: 16px; padding: 8px 0; position: relative; }
+.timeline-dot {
+  width: 14px; height: 14px; border-radius: 50%;
+  border: 2px solid var(--teal); background: white;
+  flex-shrink: 0; margin-top: 3px; position: absolute; left: -24px;
+}
+.timeline-dot.done { background: var(--teal); }
+.timeline-dot.future { border-color: var(--coral-light); background: white; }
+
+/* ---- TITLE SLIDE ---- */
+.slide-title {
+  background: linear-gradient(155deg, #FAFCFC 0%, #F4F8F8 30%, #FBF9F7 70%, #FFF 100%);
+  justify-content: center; align-items: center; text-align: center;
+}
+.slide-title h1 { font-size: 38px; margin-bottom: 12px; }
+.slide-title .subtitle { font-size: 18px; max-width: 560px; }
+
+/* ---- CLOSING SLIDE ---- */
+.slide-closing {
+  background: linear-gradient(155deg, #FAFCFC 0%, #F4F8F8 30%, #FBF9F7 70%, #FFF 100%);
+  justify-content: center; align-items: center; text-align: center;
+}
+
+/* ---- GAP VISUAL ---- */
+.gap-visual {
+  display: flex; align-items: stretch; gap: 0; margin: 16px 0;
+}
+.gap-side {
+  flex: 1; padding: 20px; border-radius: 10px; display: flex;
+  flex-direction: column; justify-content: center;
+}
+.gap-center {
+  flex: 1.2; padding: 20px; border-radius: 10px; display: flex;
+  flex-direction: column; justify-content: center; align-items: center; text-align: center;
+  border: 2px dashed var(--coral); background: rgba(232,107,90,0.03);
+  margin: 0 8px;
+}
+
+/* ---- TAM/SAM/SOM ---- */
+.market-circles {
+  display: flex; align-items: center; justify-content: center; gap: 32px;
+}
+.circle-container { text-align: center; }
+.circle-outer {
+  width: 180px; height: 180px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column;
+}
+.circle-mid {
+  width: 130px; height: 130px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column;
+}
+.circle-inner {
+  width: 90px; height: 90px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column;
+}
+
+/* ---- COMPETITIVE POSITION ---- */
+.comp-grid {
+  display: grid; grid-template-columns: 1fr 1.4fr 1fr; gap: 16px; align-items: stretch;
+}
+.comp-card {
+  padding: 20px; border-radius: 12px; display: flex;
+  flex-direction: column; gap: 8px;
+}
+.comp-left { background: #F4F8F8; border: 1px solid #D8E8E8; }
+.comp-center { background: linear-gradient(135deg, rgba(27,138,138,0.08), rgba(232,107,90,0.08)); border: 2px solid var(--teal); }
+.comp-right { background: #FBF7F6; border: 1px solid #E8D8D4; }
+
+/* ---- MOAT LAYERS ---- */
+.moat-stack { display: flex; flex-direction: column; gap: 10px; }
+.moat-layer {
+  display: flex; align-items: center; gap: 16px;
+  padding: 14px 20px; border-radius: 10px;
+  background: var(--bg-cool);
+  border-left: 3px solid var(--teal);
+}
+.moat-num {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--teal); color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700; flex-shrink: 0;
+}
+
+/* ---- REVENUE CHART (CSS) ---- */
+.rev-chart { display: flex; align-items: flex-end; gap: 6px; height: 160px; padding: 0 8px; }
+.rev-bar {
+  flex: 1; border-radius: 4px 4px 0 0;
+  position: relative; min-width: 18px;
+  transition: height 0.3s;
+}
+.rev-bar .rev-label {
+  position: absolute; bottom: -20px; left: 50%;
+  transform: translateX(-50%); font-size: 10px; color: var(--text-light);
+  white-space: nowrap;
+}
+.rev-bar .rev-val {
+  position: absolute; top: -18px; left: 50%;
+  transform: translateX(-50%); font-size: 9px; font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ---- PRINT ---- */
+@media print {
+  .slide { display: flex !important; opacity: 1 !important; position: relative !important;
+    page-break-after: always; height: 100vh; overflow: hidden; }
+  .nav-arrows, .slide-counter, .progress-bar { display: none !important; }
+  html, body { overflow: visible; height: auto; }
+  .deck { height: auto; }
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 900px) {
+  .slide { padding: 32px 28px 48px; }
+  h1 { font-size: 30px; } h2 { font-size: 22px; }
+  .stat-mega { font-size: 40px; } .stat-large { font-size: 32px; }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .comp-grid { grid-template-columns: 1fr; }
+  .flow-row { flex-wrap: wrap; }
+  .gap-visual { flex-direction: column; }
+  .market-circles { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="deck" id="deck">
+
+<!-- ============================================ -->
+<!-- SLIDE 1: TITLE                               -->
+<!-- ============================================ -->
+<div class="slide slide-title active" data-slide="1">
+  <div style="margin-bottom: 32px;">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 70" width="300" height="62">
+      <defs><linearGradient id="fl-g" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#1B8A8A"/><stop offset="25%" stop-color="#1B8A8A"/><stop offset="50%" stop-color="#2E7BA8"/><stop offset="75%" stop-color="#D4826A"/><stop offset="100%" stop-color="#E86B5A"/></linearGradient></defs>
+      <path d="M 38 58 C 20 54, 8 44, 8 34 C 8 20, 20 10, 36 10 C 52 10, 62 20, 62 34 C 62 44, 54 52, 42 56" fill="none" stroke="url(#fl-g)" stroke-width="4" stroke-linecap="round"/>
+      <text x="78" y="42" font-family="Poppins, sans-serif" font-weight="300" font-size="28" fill="#1B4A5E" letter-spacing="1">Noeva</text>
+      <text x="185" y="42" font-family="Poppins, sans-serif" font-weight="500" font-size="28" fill="#1B4A5E" letter-spacing="1">Health</text>
+    </svg>
+  </div>
+  <h1 style="margin-bottom: 16px;">Her Health Discovered Sooner.</h1>
+  <p class="subtitle" style="margin-bottom: 28px;">AI-Powered Diagnostic Acceleration for Women's Health</p>
+  <div style="display: flex; gap: 12px; margin-bottom: 32px;">
+    <span class="badge badge-teal">BDC Capital Life Sciences Venture Fund</span>
+  </div>
+  <p style="font-size: 15px; font-weight: 500; color: var(--navy);">Eveline Soares Menezes, PhD &mdash; Founder &amp; CEO</p>
+  <p style="font-size: 12px; color: var(--text-light); margin-top: 6px;">menezes@noevahealth.com &nbsp;|&nbsp; noevahealth.com</p>
+</div>
+
+<!-- ============================================ -->
+<!-- SLIDE 2: THE HOOK                            -->
+<!-- ============================================ -->
+<div class="slide" data-slide="2" style="background: var(--bg-warm); justify-content: center; align-items: center; text-align: center;">
+  <div class="header-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 70" width="28" height="28">
+      <defs><linearGradient id="hdr-g2" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#1B8A8A"/><stop offset="25%" stop-color="#1B8A8A"/><stop offset="50%" stop-color="#2E7BA8"/><stop offset="75%" stop-color="#D4826A"/><stop offset="100%" stop-color="#E86B5A"/></linearGradient></defs>
+      <path d="M 38 58 C 20 54, 8 44, 8 34 C 8 20, 20 10, 36 10 C 52 10, 62 20, 62 34 C 62 44, 54 52, 42 56" fill="none" stroke="url(#hdr-g2)" stroke-width="4" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div style="max-width: 680px;">
+    <div style="margin-bottom: 32px;"></div>
+    <p style="font-size: 30px; font-weight: 600; color: var(--navy); line-height: 1.4; margin-bottom: 24px;">
+      &ldquo;They tell you nothing is wrong<br>but it FEELS wrong.&rdquo;
+    </p>
+    <p style="font-size: 14px; color: var(--text-sub); margin-bottom: 48px;">
+      &mdash; 28-year-old woman, Ontario. Still undiagnosed after 10+ years of symptoms.
+    </p>
+    <div style="width: 48px; height: 2px; background: var(--coral); margin: 0 auto 24px;"></div>
+    <p style="font-size: 20px; font-weight: 600; color: var(--navy);">She's one of <span style="color: var(--coral);">7 million</span>.</p>
+    <p style="font-size: 13px; color: var(--text-sub); margin-top: 8px;">Canadian women reporting delayed or missed diagnoses</p>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- SLIDE 3: THE PROBLEM                         -->
+<!-- ============================================ -->
+<div class="slide" data-slide="3" style="background: var(--bg);">
+  <div class="header-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 70" width="28" height="28"><defs><linearGradient id="hdr-g3" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#1B8A8A"/><stop offset="25%" stop-color="#1B8A8A"/><stop offset="50%" stop-color="#2E7BA8"/><stop offset="75%" stop-color="#D4826A"/><stop offset="100%" stop-color="#E86B5A"/></linearGradient></defs><path d="M 38 58 C 20 54, 8 44, 8 34 C 8 20, 20 10, 36 10 C 52 10, 62 20, 62 34 C 62 44, 54 52, 42 56" fill="none" stroke="url(#hdr-g3)" stroke-width="4" stroke-linecap="round"/></svg>
+  </div>
+  <div class="label" style="margin-top: 8px;">The Problem</div>
+  <h2 style="margin-bottom: 28px;">Women's health is systematically under-served</h2>
+
+  <div class="grid-3" style="margin-bottom: 28px;">
+    <div class="card card-coral" style="text-align: center;">
+      <div class="stat-mega stat-coral">7&ndash;10</div>
+      <div class="stat-label">years average diagnostic<br>delay for endometriosis</div>
+    </div>
+    <div class="card card-coral" style="text-align: center;">
+      <div class="stat-mega stat-coral">10M</div>
+      <div class="stat-label">Canadian women say healthcare<br>doesn't meet their needs</div>
+    </div>
+    <div class="card card-coral" style="text-align: center;">
+      <div class="stat-mega stat-coral">52%</div>
+      <div class="stat-label">of women feel "not at all"<br>taken seriously by providers</div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card" style="background: var(--bg-cool);">
+      <h3 style="font-size: 14px; margin-bottom: 8px;">The Root Cause</h3>
+      <p style="font-size: 15px;">No structured path from <strong>symptoms</strong> to <strong>clinical action</strong>. The system is fragmented and reactive &mdash; women bounce between GPs, wait months, get dismissed, and research alone.</p>
+    </div>
+    <div class="card" style="background: var(--bg-cool);">
+      <h3 style="font-size: 14px; margin-bottom: 8px;">The Structural Gap</h3>
+      <p style="font-size: 15px;">Only <strong>4%</strong> of healthcare R&amp;D globally targets women's health. Drug withdrawals are <strong>3.5x</strong> more likely due to women's safety risks vs men. Women spend <strong>25% more</strong> of their lives in poor health.</p>
+      <p style="font-size: 11px; color: var(--text-light); margin-top: 8px;">Sources: WEF/McKinsey &ldquo;Closing the Women&rsquo;s Health Gap&rdquo; 2024; FDA drug withdrawal analysis 1980&ndash;2023</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- SLIDE 4: THE GAP                             -->
+<!-- ============================================ -->
+<div class="slide" data-slide="4" style="background: var(--bg-warm);">
+  <div class="header-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 70" width="28" height="28"><defs><linearGradient id="hdr-g4" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#1B8A8A"/><stop offset="25%" stop-color="#1B8A8A"/><stop offset="50%" stop-color="#2E7BA8"/><stop offset="75%" stop-color="#D4826A"/><stop offset="100%" stop-color="#E86B5A"/></linearGradient></defs><path d="M 38 58 C 20 54, 8 44, 8 34 C 8 20, 20 10, 36 10 C 52 10, 62 20, 62 34 C 62 44, 54 52, 42 56" fill="none" stroke="url(#hdr-g4)" stroke-width="4" stroke-linecap="round"/></svg>
+  </div>
+  <div class="label" style="margin-top: 8px;">The Patient Journey</div>
+  <h2 style="margin-bottom: 24px;">There's a gap where nobody helps</h2>
+
+  <div class="gap-visual" style="margin-bottom: 24px;">
+    <div class="gap-side" style="background: rgba(232,107,90,0.06); border-radius: 12px; text-align: center;">
+      <div style="font-size: 32px; margin-bottom: 8px;">&#x1F615;</div>
+      <h3 style="font-size: 15px; color: var(--coral);">Something Is Wrong</h3>
+      <p style="font-size: 14px; margin-top: 6px;">Symptoms appear. Pain, fatigue, irregular cycles. She knows something isn't right.</p>
+    </div>
+    <div class="gap-center">
+      <div style="font-size: 15px; font-weight: 700; color: var(--coral); margin-bottom: 8px;">THE GAP</div>
+      <div style="font-size: 14px; color: var(--text-sub); line-height: 1.6;">
+        No symptom interpretation<br>
+        No structured guidance<br>
+        No clinical preparation<br>
+        <strong style="color: var(--coral);">Average: 7&ndash;10 years here</strong>
+      </div>
+    </div>
+    <div class="gap-side" style="background: rgba(27,138,138,0.06); border-radius: 12px; text-align: center;">
+      <div style="font-size: 32px; margin-bottom: 8px;">&#x2705;</div>
+      <h3 style="font-size: 15px; color: var(--teal);">Treatment &amp; Care</h3>
+      <p style="font-size: 14px; margin-top: 6px;">Diagnosis, treatment plan, specialist care. But getting here takes years.</p>
+    </div>
+  </div>
+
+  <div class="card" style="background: white; text-align: center;">
+    <p class="label" style="margin-bottom: 6px;">Current Reality</p>
+    <div class="flow-row" style="justify-content: center;">
+      <div class="flow-step" style="background: rgba(232,107,90,0.08); font-size: 14px;">GP visit<br><span style="color: var(--coral); font-size: 15px;">"It's normal"</span></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step" style="background: rgba(232,107,90,0.08); font-size: 14px;">Wait 3&ndash;6 months<br><span style="color: var(--coral); font-size: 15px;">no progress</span></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step" style="background: rgba(232,107,90,0.08); font-size: 14px;">Repeat &amp; dismissed<br><span style="color: var(--coral); font-size: 15px;">"it's stress"</span></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step" style="background: rgba(232,107,90,0.08); font-size: 14px;">Google &amp; Reddit<br><span style="color: var(--coral); font-size: 15px;">alone</span></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step" style="background: rgba(232,107,90,0.08); font-size: 14px;">Years pass<br><span style="color: var(--coral); font-size: 15px;">worsening</span></div>
+    </div>
+  </div>
+
+  <div style="text-align: center; margin-top: 16px;">
+    <p style="font-size: 14px; font-weight: 600; color: var(--navy);">What's missing: <span style="color: var(--teal);">structured symptom interpretation &rarr; clear next steps &rarr; clinical validation</span></p>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- SLIDE 5: THE SOLUTION                        -->
+<!-- ============================================ -->
+<div class="slide" data-slide="5" style="background: var(--bg);">
+  <div class="header-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 70" width="28" height="28"><defs><linearGradient id="hdr-g5" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#1B8A8A"/><stop offset="25%" stop-color="#1B8A8A"/><stop offset="50%" stop-color="#2E7BA8"/><stop offset="75%" stop-color="#D4826A"/><stop offset="100%" stop-color="#E86B5A"/></linearGradient></defs><path d="M 38 58 C 20 54, 8 44, 8 34 C 8 20, 20 10, 36 10 C 52 10, 62 20, 62 34 C 62 44, 54 52, 42 56" fill="none" stroke="url(#hdr-g5)" stroke-width="4" stroke-linecap="round"/></svg>
+  </div>
+  <div class="label" style="margin-top: 8px;">The Solution</div>
+  <h2 style="margin-bottom: 6px;">AI-powered navigation + clinical activation</h2>
+  <p class="subtitle" style="margin-bottom: 24px;">From symptoms to clear, validated next steps</p>
+
+  <div class="flow-row" style="margin-bottom: 28px;">
+    <div class="flow-step" style="background: linear-gradient(135deg, rgba(27,138,138,0.12), rgba(27,138,138,0.06));">
+      <div style="font-size: 22px; margin-bottom: 4px;">&#x1F4DD;</div>
+      <strong style="font-size: 14px; color: var(--teal);">Symptoms</strong><br>
+      <span style="font-size: 14px;">Structured intake</span>
+    </div>
+    <div class="flow-arrow" style="color: var(--teal);">&rarr;</div>
+    <div class="flow-step" style="background: linear-gradient(135deg, rgba(46,123,168,0.12), rgba(46,123,168,0.06));">
+      <div style="font-size: 22px; margin-bottom: 4px;">&#x1F9E0;</div>
+      <strong style="font-size: 14px; color: var(--blue-mid);">AI Analysis</strong><br>
+      <span style="font-size: 14px;">6-condition ontology</span>
+    </div>
+    <div class="flow-arrow" style="color: var(--blue-mid);">&rarr;</div>
+    <div class="flow-step" style="background: linear-gradient(135deg, rgba(27,74,94,0.12), rgba(27,74,94,0.06));">
+      <div style="font-size: 22px; margin-bottom: 4px;">&#x1F6A9;</div>
+      <strong style="font-size: 14px; color: var(--navy);">Care Pathway</strong><br>
+      <span style="font-size: 14px;">Tests + urgency</span>
+    </div>
+    <div class="flow-arrow" style="color: var(--navy);">&rarr;</div>
+    <div class="flow-step" style="background: linear-gradient(135deg, rgba(212,130,106,0.12), rgba(212,130,106,0.06));">
+      <div style="font-size: 22px; margin-bottom: 4px;">&#x1F469;&#x200D;&#x2695;&#xFE0F;</div>
+      <strong style="font-size: 14px; color: #D4826A;">NP Validation</strong><br>
+      <span style="font-size: 14px;">Clinical review</span>
+    </div>
+    <div class="flow-arrow" style="color: var(--coral);">&rarr;</div>
+    <div class="flow-step" style="background: linear-gradient(135deg, rgba(232,107,90,0.12), rgba(232,107,90,0.06));">
+      <div style="font-size: 22px; margin-bottom: 4px;">&#x26A1;</div>
+      <strong style="font-size: 14px; color: var(--coral);">Faster Diagnosis</strong><br>
+      <span style="font-size: 14px;">Months, not years</span>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card card-teal">
+      <h3 style="font-size: 14px;">What We Are</h3>
+      <p style="font-size: 15px;">A <strong>diagnostic acceleration layer</strong> that bridges the gap between symptoms and clinical action. AI-powered triage backed by 62+ clinical citations across 6 conditions.</p>
+    </div>
+    <div class="card card-navy">
+      <h3 style="font-size: 14px;">What We're Not</h3>
+      <p style="font-size: 15px;">We don't replace the healthcare system. We make it <strong>work faster</strong> for women. Patients arrive prepared, providers get structured data, everyone saves time.</p>
+    </div>
+  </div>
+
+  <div style="text-align: center; margin-top: 20px;">
+    <div style="display: inline-flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+      <span class="badge badge-teal">Endometriosis</span>
+      <span class="badge badge-teal">PMOS</span>
+      <span class="badge badge-teal">Perimenopause</span>
+      <span class="badge badge-teal">Menopause</span>
+      <span class="badge badge-navy">PMDD</span>
+      <span class="badge badge-navy">Adenomyosis</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- SLIDE 6: HOW IT WORKS                        -->
+<!-- ============================================ -->
+<div class="slide" data-slide="6" style="background: var(--bg-cool);">
+  <div class="header-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 70" width="28" height="28"><defs><linearGradient id="hdr-g6" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#1B8A8A"/><stop offset="25%" stop-color="#1B8A8A"/><stop offset="50%" stop-color="#2E7BA8"/><stop offset="75%" stop-color="#D4826A"/><stop offset="100%" stop-color="#E86B5A"/></linearGradient></defs><path d="M 38 58 C 20 54, 8 44, 8 34 C 8 20, 20 10, 36 10 C 52 10, 62 20, 62 34 C 62 44, 54 52, 42 56" fill="none" stroke="url(#hdr-g6)" stroke-width="4" stroke-linecap="round"/></svg>
+  </div>
+  <div class="label" style="margin-top: 8px;">Product</div>
+  <h2 style="margin-bottom: 4px;">The Clarity Engine</h2>
+  <p class="subtitle" style="margin-bottom: 24px;">Four steps from confusion to clarity</p>
+
+  <div class="grid-4" style="margin-bottom: 24px;">
+    <div class="card" style="text-align: center; background: white;">
+      <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--gradient-teal); color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: 700; font-size: 16px;">1</div>
+      <h3 style="font-size: 15px; margin-bottom: 4px;">Symptom Input</h3>
+      <p style="font-size: 14px;">4-step structured intake captures symptoms, severity, duration, and patterns</p>
+    </div>
+    <div class="card" style="text-align: center; background: white;">
+      <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--gradient-teal); color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: 700; font-size: 16px;">2</div>
+      <h3 style="font-size: 15px; margin-bottom: 4px;">AI Analysis</h3>
+      <p style="font-size: 14px;">Evidence-based engine maps symptoms against 6-condition clinical ontology (62+ citations)</p>
+    </div>
+    <div class="card" style="text-align: center; background: white;">
+      <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--gradient-teal); color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: 700; font-size: 16px;">3</div>
+      <h3 style="font-size: 15px; margin-bottom: 4px;">Clear Results</h3>
+      <p style="font-size: 14px;">Ranked likely conditions, recommended tests, urgency level, and care pathway</p>
+    </div>
+    <div class="card" style="text-align: center; background: white;">
+      <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--gradient-warm); color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: 700; font-size: 16px;">4</div>
+      <h3 style="font-size: 15px; margin-bottom: 4px;">Appointment Prep</h3>
+      <p style="font-size: 14px;">Printable, structured document. She arrives <strong>prepared and impossible to dismiss</strong></p>
+    </div>
+  </div>
+
+  <div class="quote-block">
+    <p style="font-size: 17px;">&ldquo;She arrives at her doctor prepared, prioritized, and impossible to dismiss.&rdquo;</p>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- SLIDE 7: VALIDATION                          -->
+<!-- ============================================ -->
+<div class="slide" data-slide="7" style="background: var(--bg);">
+  <div class="header-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 70" width="28" height="28"><defs><linearGradient id="hdr-g7" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#1B8A8A"/><stop offset="25%" stop-color="#1B8A8A"/><stop offset="50%" stop-color="#2E7BA8"/><stop offset="75%" stop-color="#D4826A"/><stop offset="100%" stop-color="#E86B5A"/></linearGradient></defs><path d="M 38 58 C 20 54, 8 44, 8 34 C 8 20, 20 10, 36 10 C 52 10, 62 20, 62 34 C 62 44, 54 52, 42 56" fill="none" stroke="url(#hdr-g7)" stroke-width="4" stroke-linecap="round"/></svg>
+  </div>
+  <div class="label" style="margin-top: 8px;">Validation</div>
+  <h2 style="margin-bottom: 24px;">Customer discovery confirms demand</h2>
+
+  <div class="grid-3" style="margin-bottom: 24px;">
+    <div class="card card-teal" style="text-align: center;">
+      <div class="stat-large stat-teal">76%</div>
+      <div class="stat-label">would use a data-driven<br>diagnostic approach</div>
+    </div>
+    <div class="card card-teal" style="text-align: center;">
+      <div class="stat-large stat-teal">70%</div>
+      <div class="stat-label">rank better symptom<br>understanding as #1 need</div>
+    </div>
+    <div class="card card-teal" style="text-align: center;">
+      <div class="stat-large stat-teal">4/5</div>
+      <div class="stat-label">interviewees chose<br>supported appointment</div>
+    </div>
+  </div>
+
+  <div class="grid-2" style="margin-bottom: 16px;">
+    <div class="quote-block">
+      <p style="font-size: 15px;">&ldquo;Doctors would have more insights about my health, therefore my assessment would be more specific.&rdquo;</p>
+      <div class="quote-attr">&mdash; Interview participant</div>
+    </div>
+    <div class="card" style="background: var(--bg-cool);">
+      <h3 style="font-size: 14px; margin-bottom: 12px;">Assumption Validation</h3>
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="background: var(--teal); color: white; border-radius: 4px; padding: 2px 8px; font-size: 15px; font-weight: 600;">VALIDATED</span>
+          <span style="font-size: 14px;">Women need structured symptom interpretation</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="background: var(--teal); color: white; border-radius: 4px; padding: 2px 8px; font-size: 15px; font-weight: 600;">VALIDATED</span>
+          <span style="font-size: 14px;">Data-driven approaches are preferred</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="background: var(--blue-mid); color: white; border-radius: 4px; padding: 2px 8px; font-size: 15px; font-weight: 600;">DIRECTIONAL</span>
+          <span style="font-size: 14px;">Willingness to pay for assessments</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="background: var(--blue-mid); color: white; border-radius: 4px; padding: 2px 8px; font-size: 15px; font-weight: 600;">DIRECTIONAL</span>
+          <span style="font-size: 14px;">NP validation adds perceived value</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="background: var(--blue-mid); color: white; border-radius: 4px; padding: 2px 8px; font-size: 15px; font-weight: 600;">DIRECTIONAL</span>
+          <span style="font-size: 14px;">Appointment prep improves outcomes</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align: center;">
+    <span class="badge badge-teal" style="font-size: 15px; padding: 6px 16px;">n = 26 participants &nbsp;|&nbsp; 21 survey + 5 interviews &nbsp;|&nbsp; Discovery Score: 4.0 / 5.0</span>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- SLIDE 8: MARKET OPPORTUNITY                  -->
+<!-- ============================================ -->
+<div class="slide" data-slide="8" style="background: var(--bg-warm);">
+  <div class="header-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 70" width="28" height="28"><defs><linearGradient id="hdr-g8" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#1B8A8A"/><stop offset="25%" stop-color="#1B8A8A"/><stop offset="50%" stop-color="#2E7BA8"/><stop offset="75%" stop-color="#D4826A"/><stop offset="100%" stop-color="#E86B5A"/></linearGradient></defs><path d="M 38 58 C 20 54, 8 44, 8 34 C 8 20, 20 10, 36 10 C 52 10, 62 20, 62 34 C 62 44, 54 52, 42 56" fill="none" stroke="url(#hdr-g8)" stroke-width="4" stroke-linecap="round"/></svg>
+  </div>
+  <div class="label" style="margin-top: 8px;">Market Opportunity</div>
+  <h2 style="margin-bottom: 24px;">A trillion-dollar gap, validated by global institutions</h2>
+
+  <div class="grid-2" style="margin-bottom: 24px;">
+    <!-- TAM/SAM/SOM visual -->
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+      <svg viewBox="0 0 400 300" width="400" height="300" style="overflow: visible;">
+        <!-- TAM -->
+        <ellipse cx="200" cy="150" rx="190" ry="135" fill="rgba(27,138,138,0.08)" stroke="var(--teal)" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="200" y="30" text-anchor="middle" font-family="Poppins" font-size="14" fill="#1B8A8A" font-weight="600">TAM</text>
+        <text x="200" y="52" text-anchor="middle" font-family="Poppins" font-size="24" fill="#1B4A5E" font-weight="700">$18.2B</text>
+        <text x="200" y="70" text-anchor="middle" font-family="Poppins" font-size="12" fill="#5A6B7A">AI women's health diagnostics (global)</text>
+        <!-- SAM -->
+        <ellipse cx="200" cy="175" rx="115" ry="82" fill="rgba(46,123,168,0.1)" stroke="var(--blue-mid)" stroke-width="1.5"/>
+        <text x="200" y="130" text-anchor="middle" font-family="Poppins" font-size="14" fill="#2E7BA8" font-weight="600">SAM</text>
+        <text x="200" y="155" text-anchor="middle" font-family="Poppins" font-size="22" fill="#1B4A5E" font-weight="700">$495M</text>
+        <text x="200" y="175" text-anchor="middle" font-family="Poppins" font-size="12" fill="#5A6B7A">Canada — 1.25M women</text>
+        <!-- SOM -->
+        <ellipse cx="200" cy="215" rx="55" ry="36" fill="rgba(232,107,90,0.12)" stroke="var(--coral)" stroke-width="2"/>
+        <text x="200" y="210" text-anchor="middle" font-family="Poppins" font-size="12" fill="#E86B5A" font-weight="600">SOM Yr 1</text>
+        <text x="200" y="228" text-anchor="middle" font-family="Poppins" font-size="16" fill="#1B4A5E" font-weight="700">$42K–$174K</text>
+      </svg>
+      <p style="font-size: 14px; color: var(--text-sub); margin-top: 4px;">Based on 10 industry reports</p>
+    </div>
+
+    <!-- Market signals -->
+    <div class="flex-col gap-12">
+      <div class="card card-teal">
+        <div class="stat-med stat-teal">$1T</div>
+        <div class="stat-label">annual GDP opportunity from closing the women's health gap</div>
+        <p style="font-size: 15px; color: var(--text-light); margin-top: 4px;">Source: WEF / McKinsey</p>
+      </div>
+      <div class="card card-coral">
+        <div class="stat-med stat-coral">$2.6B</div>
+        <div class="stat-label">VC invested in women's health in 2024 &mdash; <strong>up 55% YoY</strong></div>
+        <p style="font-size: 15px; color: var(--text-light); margin-top: 4px;">Source: eMarketer</p>
+      </div>
+      <div class="grid-2" style="gap: 12px;">
+        <div class="card" style="text-align: center; padding: 16px; background: white;">
+          <div class="stat-med stat-navy">$37B</div>
+          <div class="stat-label">Canadian opportunity</div>
+          <p style="font-size: 15px; color: var(--text-light);">McKinsey</p>
+        </div>
+        <div class="card" style="text-align: center; padding: 16px; background: white;">
+          <div class="stat-med stat-teal">3:1</div>
+          <div class="stat-label">return per $1 invested</div>
+          <p style="font-size: 15px; color: var(--text-light);">WEF</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align: center;">
+    <p style="font-size: 16px; font-weight: 600; color: var(--navy);">The market is proven. The timing is now.</p>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- SLIDE 9: BUSINESS MODEL                      -->
+<!-- ============================================ -->
+<div class="slide" data-slide="9" style="background: var(--bg);">
+  <div class="header-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 70" width="28" height="28"><defs><linearGradient id="hdr-g9" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#1B8A8A"/><stop offset="25%" stop-color="#1B8A8A"/><stop offset="50%" stop-color="#2E7BA8"/><stop offset="75%" stop-color="#D4826A"/><stop offset="100%" stop-color="#E86B5A"/></linearGradient></defs><path d="M 38 58 C 20 54, 8 44, 8 34 C 8 20, 20 10, 36 10 C 52 10, 62 20, 62 34 C 62 44, 54 52, 42 56" fill="none" stroke="url(#hdr-g9)" stroke-width="4" stroke-linecap="round"/></svg>
+  </div>
+  <div class="label" style="margin-top: 8px;">Business Model</div>
+  <h2 style="margin-bottom: 24px;">Multi-stream revenue with clear path to B2B</h2>
+
+  <div class="grid-3" style="margin-bottom: 24px;">
+    <div class="card card-teal">
+      <span class="badge badge-teal" style="margin-bottom: 8px;">Phase 1a &mdash; Now</span>
+      <h3 style="font-size: 14px;">AI Assessment</h3>
+      <div style="margin-top: 8px;">
+        <p style="font-size: 24px; font-weight: 700; color: var(--teal);">$9.99&ndash;$14.99</p>
+        <p style="font-size: 14px; color: var(--text-sub);">per assessment</p>
+      </div>
+      <div style="margin-top: 8px;">
+        <p style="font-size: 24px; font-weight: 700; color: var(--teal);">$19.99<span style="font-size: 14px; font-weight: 400;">/mo</span></p>
+        <p style="font-size: 14px; color: var(--text-sub);">subscription (unlimited)</p>
+      </div>
+    </div>
+    <div class="card card-coral">
+      <span class="badge badge-coral" style="margin-bottom: 8px;">Phase 1b &mdash; Month 5</span>
+      <h3 style="font-size: 14px;">NP Validation</h3>
+      <div style="margin-top: 8px;">
+        <p style="font-size: 24px; font-weight: 700; color: var(--coral);">$35&ndash;$70</p>
+        <p style="font-size: 14px; color: var(--text-sub);">per clinical session</p>
+      </div>
+      <p style="font-size: 14px; color: var(--text-sub); margin-top: 8px;">Lab requisitions + referral guidance from licensed NPs</p>
+    </div>
+    <div class="card card-navy">
+      <span class="badge badge-navy" style="margin-bottom: 8px;">Phase 2 &mdash; Year 2</span>
+      <h3 style="font-size: 14px;">B2B Enterprise</h3>
+      <div style="margin-top: 8px;">
+        <p style="font-size: 20px; font-weight: 700; color: var(--navy);">PEPM Model</p>
+        <p style="font-size: 14px; color: var(--text-sub);">per-employee-per-month</p>
+      </div>
+      <p style="font-size: 14px; color: var(--text-sub); margin-top: 8px;">Employers + insurers. Women's health as employee benefit.</p>
+    </div>
+  </div>
+
+  <!-- Revenue projection chart -->
+  <div class="card" style="padding: 20px 24px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+      <h3 style="font-size: 14px;">Year 1 Revenue Projection (3 Scenarios)</h3>
+      <div style="display: flex; gap: 16px;">
+        <span style="font-size: 15px; display: flex; align-items: center; gap: 4px;"><span style="width: 10px; height: 10px; background: var(--teal); border-radius: 2px; display: inline-block;"></span> Conservative</span>
+        <span style="font-size: 15px; display: flex; align-items: center; gap: 4px;"><span style="width: 10px; height: 10px; background: var(--blue-mid); border-radius: 2px; display: inline-block;"></span> Base</span>
+        <span style="font-size: 15px; display: flex; align-items: center; gap: 4px;"><span style="width: 10px; height: 10px; background: var(--coral); border-radius: 2px; display: inline-block;"></span> Optimistic</span>
+      </div>
+    </div>
+    <div style="display: flex; align-items: flex-end; gap: 3px; height: 120px; padding-bottom: 24px;">
+      <!-- Month bars (grouped by 3 scenarios) -->
+      <div style="flex: 1; display: flex; gap: 1px; align-items: flex-end; height: 100%; position: relative;">
+        <div style="flex: 1; height: 4%; background: var(--teal); border-radius: 2px 2px 0 0; min-height: 2px;"></div>
+        <div style="flex: 1; height: 5%; background: var(--blue-mid); border-radius: 2px 2px 0 0; min-height: 2px;"></div>
+        <div style="flex: 1; height: 8%; background: var(--coral); border-radius: 2px 2px 0 0; min-height: 3px;"></div>
+        <div style="position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%); font-size: 14px; color: var(--text-light);">M1</div>
+      </div>
+      <div style="flex: 1; display: flex; gap: 1px; align-items: flex-end; height: 100%; position: relative;">
+        <div style="flex: 1; height: 6%; background: var(--teal); border-radius: 2px 2px 0 0;"></div>
+        <div style="flex: 1; height: 8%; background: var(--blue-mid); border-radius: 2px 2px 0 0;"></div>
+        <div style="flex: 1; height: 12%; background: var(--coral); border-radius: 2px 2px 0 0;"></div>
+        <div style="position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%); font-size: 14px; color: var(--text-light);">M2</div>
+      </div>
+      <div style="flex: 1; display: flex; gap: 1px; align-items: flex-end; height: 100%; position: relative;">
+        <div style="flex: 1; height: 8%; background: var(--teal); border-radius: 2px 2px 0 0;"></div>
+        <div style="flex: 1; height: 12%; background: var(--blue-mid); border-radius: 2px 2px 0 0;"></div>
+        <div style="flex: 1; height: 18%; background: var(--coral); border-radius: 2px 2px 0 0;"></div>
+        <div style="position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%); font-size: 14px; color: var(--text-light);">M3</div>
+      </div>
+      <div style="flex: 1; display: flex; gap: 1px; align-items: flex-end; height: 100%; position: relative;">
+        <div style="flex: 1; height: 10%; background: var(--teal); border-radius: 2px 2px 0 0;"></div>
+        <div style="flex: 1; height: 16%; background: var(--blue-mid); border-radius: 2px 2px 0 0;"></div>
+        <div style="flex: 1; height: 24%; background: var(--coral); border-radius: 2px 2px 0 0;"></div>
+        <div style="position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%); font-size: 14px; color: var(--text-light);">M4</div>
+      </div>
+      <div style="flex: 1; display: flex; gap: 1px; align-items: flex-end; height: 100%; position: relative;">
+        <div style="flex: 1; height: 14%; background: var(--teal); border-radius: 2px 2px 0 0;"></div>
+        <div style="flex: 1; height: 22%; background: var(--blue-mid); border-radius: 2px 2px 0 0;"></div>
+        <div style="flex: 1; height: 32%; background: var(--coral); border-radius: 2px 2px 0 0;"></div>
+        <div style="position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%); font-size: 14px; color: var(--text-light);">M5</div>
+      </div>
+      <div style="flex: 1; display: flex; gap: 1px; align-items: flex-end; height: 100%; position: relative;">
+        <div style="flex: 1; height: 18%; background: var(--teal); border-radius: 2px 2px 0 0;"></div>
+        <div style="flex: 1; height: 28%; background: var(--blue-mid); border-radius: 2px 2px 0 0;"></div>
+        <div style="flex: 1; height: 40%; background: var(--coral); border-radius: 2px 2px 0 0;"></div>
+        <div style="position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%); font-size: 14px; color: var(--text-light);">M6</div>
+      </div>
+      <div style="flex: 1; display: flex; gap: 1px; align-items: flex-end; height: 100%; position: relative;">
+        <div style="flex: 1; height: 24%; background: var(--teal); border-radius: 2px 2px 0 0;"></div>
+        <div style="flex: 1; height: 36%; background: var(--blue-mid); border-radius: 2px 2px 0 0;"></div>
+        <div style="flex: 1; height: 50%; background: var(--coral); border-radius: 2px 2px 0 0;"></div>
+        <div style="position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%); font-size: 14px; color: var(--text-light);">M7</div>
+      </div>
+      <div style="flex: 1; display: flex; gap: 1px; align-items: flex-end; height: 100%; position: relative;">
+        <div style="flex: 1; height: 30%; background: var(--teal); border-radius: 2px 2px 0 0;"></div>
+        <div style="flex: 1; height: 44%; background: var(--blue-mid); border-radius: 2px 2px 0 0;"></div>
+        <div style="flex: 1; height: 58%; background: var(--coral); border-radius: 2px 2px 0 0;"></div>
+        <div style="position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%); font-size: 14px; color: var(--text-light);">M8</div>
+      </div>
+      <div style="flex: 1; display: flex; gap: 1px; align-items: flex-end; height: 100%; position: relative;">
+        <div style="flex: 1; height: 36%; background: var(--teal); border-radius: 2px 2px 0 0;"></div>
+        <div style="flex: 1; height: 52%; background: var(--blue-mid); border-radius: 2px 2px 0 0;"></div>
+        <div style="flex: 1; height: 66%; background: var(--coral); border-radius: 2px 2px 0 0;"></div>
+        <div style="position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%); font-size: 14px; color: var(--text-light);">M9</div>
+      </div>
+      <div style="flex: 1; display: flex; gap: 1px; align-items: flex-end; height: 100%; position: relative;">
+        <div style="flex: 1; height: 44%; background: var(--teal); border-radius: 2px 2px 0 0;"></div>
+        <div style="flex: 1; height: 62%; background: var(--blue-mid); border-radius: 2px 2px 0 0;"></div>
+        <div style="flex: 1; height: 76%; background: var(--coral); border-radius: 2px 2px 0 0;"></div>
+        <div style="position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%); font-size: 14px; color: var(--text-light);">M10</div>
+      </div>
+      <div style="flex: 1; display: flex; gap: 1px; align-items: flex-end; height: 100%; position: relative;">
+        <div style="flex: 1; height: 54%; background: var(--teal); border-radius: 2px 2px 0 0;"></div>
+        <div style="flex: 1; height: 74%; background: var(--blue-mid); border-radius: 2px 2px 0 0;"></div>
+        <div style="flex: 1; height: 88%; background: var(--coral); border-radius: 2px 2px 0 0;"></div>
+        <div style="position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%); font-size: 14px; color: var(--text-light);">M11</div>
+      </div>
+      <div style="flex: 1; display: flex; gap: 1px; align-items: flex-end; height: 100%; position: relative;">
+        <div style="flex: 1; height: 64%; background: var(--teal); border-radius: 2px 2px 0 0;"></div>
+        <div style="flex: 1; height: 88%; background: var(--blue-mid); border-radius: 2px 2px 0 0;"></div>
+        <div style="flex: 1; height: 100%; background: var(--coral); border-radius: 2px 2px 0 0;"></div>
+        <div style="position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%); font-size: 14px; color: var(--text-light);">M12</div>
+      </div>
+    </div>
+    <div style="display: flex; justify-content: space-between; margin-top: 28px; padding: 0 4px;">
+      <span style="font-size: 14px; color: var(--teal); font-weight: 600;">Conservative: $42K</span>
+      <span style="font-size: 14px; color: var(--blue-mid); font-weight: 600;">Base: $84K</span>
+      <span style="font-size: 14px; color: var(--coral); font-weight: 600;">Optimistic: $174K</span>
+    </div>
+  </div>
+
+  <div style="text-align: center; margin-top: 12px;">
+    <span class="badge badge-teal" style="font-size: 14px; padding: 6px 16px;">LTV : CAC &mdash; 6 : 1</span>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- SLIDE 10: COMPETITIVE LANDSCAPE              -->
+<!-- ============================================ -->
+<div class="slide" data-slide="10" style="background: var(--bg-cool);">
+  <div class="header-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 70" width="28" height="28"><defs><linearGradient id="hdr-g10" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#1B8A8A"/><stop offset="25%" stop-color="#1B8A8A"/><stop offset="50%" stop-color="#2E7BA8"/><stop offset="75%" stop-color="#D4826A"/><stop offset="100%" stop-color="#E86B5A"/></linearGradient></defs><path d="M 38 58 C 20 54, 8 44, 8 34 C 8 20, 20 10, 36 10 C 52 10, 62 20, 62 34 C 62 44, 54 52, 42 56" fill="none" stroke="url(#hdr-g10)" stroke-width="4" stroke-linecap="round"/></svg>
+  </div>
+  <div class="label" style="margin-top: 8px;">Competitive Landscape</div>
+  <h2 style="margin-bottom: 24px;">Nobody bridges AI insight AND clinical execution</h2>
+
+  <div class="comp-grid" style="margin-bottom: 24px;">
+    <div class="comp-card comp-left">
+      <h3 style="font-size: 14px; color: var(--text-sub);">Insight Tools</h3>
+      <p style="font-size: 15px; color: var(--text-sub); font-style: italic; margin-bottom: 8px;">AI insight, weak clinical execution</p>
+      <div style="display: flex; flex-direction: column; gap: 6px;">
+        <div style="padding: 8px 12px; background: white; border-radius: 6px; font-size: 15px;">
+          <strong>HealthyHer.Life</strong><br><span style="color: var(--text-light); font-size: 14px;">AI + education + community, weak clinical layer</span>
+        </div>
+        <div style="padding: 8px 12px; background: white; border-radius: 6px; font-size: 15px;">
+          <strong>HerSay</strong><br><span style="color: var(--text-light); font-size: 14px;">Strong symptom tracking + appointment prep, no clinical layer, no real diagnostic engine</span>
+        </div>
+        <div style="padding: 8px 12px; background: white; border-radius: 6px; font-size: 15px;">
+          <strong>sanoLiving</strong><br><span style="color: var(--text-light); font-size: 14px;">AI menopause + insurer B2B</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="comp-card comp-center">
+      <div style="text-align: center;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 70" width="140" height="30" style="margin-bottom: 4px;">
+          <defs><linearGradient id="comp-lg" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#1B8A8A"/><stop offset="25%" stop-color="#1B8A8A"/><stop offset="50%" stop-color="#2E7BA8"/><stop offset="75%" stop-color="#D4826A"/><stop offset="100%" stop-color="#E86B5A"/></linearGradient></defs>
+          <path d="M 38 58 C 20 54, 8 44, 8 34 C 8 20, 20 10, 36 10 C 52 10, 62 20, 62 34 C 62 44, 54 52, 42 56" fill="none" stroke="url(#comp-lg)" stroke-width="4" stroke-linecap="round"/>
+          <text x="78" y="42" font-family="Poppins, sans-serif" font-weight="300" font-size="28" fill="#1B4A5E" letter-spacing="1">Noeva</text>
+          <text x="185" y="42" font-family="Poppins, sans-serif" font-weight="500" font-size="28" fill="#1B4A5E" letter-spacing="1">Health</text>
+        </svg>
+        <p style="font-size: 14px; font-weight: 600; color: var(--teal);">AI + Clinical Execution</p>
+        <p style="font-size: 13px; color: var(--text-sub); font-style: italic;">The only one bridging both</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 8px;">
+        <div style="display: flex; align-items: center; gap: 6px; font-size: 15px;">
+          <span style="color: var(--teal); font-size: 14px;">&#x2713;</span> AI symptom triage
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px; font-size: 15px;">
+          <span style="color: var(--teal); font-size: 14px;">&#x2713;</span> Clinical ontology (62+ citations)
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px; font-size: 15px;">
+          <span style="color: var(--teal); font-size: 14px;">&#x2713;</span> NP validation + lab reqs
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px; font-size: 15px;">
+          <span style="color: var(--teal); font-size: 14px;">&#x2713;</span> Appointment prep docs
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px; font-size: 15px;">
+          <span style="color: var(--teal); font-size: 14px;">&#x2713;</span> Longitudinal data flywheel
+        </div>
+      </div>
+    </div>
+
+    <div class="comp-card comp-right">
+      <h3 style="font-size: 14px; color: var(--text-sub);">Care Delivery</h3>
+      <p style="font-size: 15px; color: var(--text-sub); font-style: italic; margin-bottom: 8px;">Strong clinical, weak AI</p>
+      <div style="display: flex; flex-direction: column; gap: 6px;">
+        <div style="padding: 8px 12px; background: white; border-radius: 6px; font-size: 15px;">
+          <strong>HorminaCare</strong><br><span style="color: var(--text-light); font-size: 14px;">NP virtual care for hormonal symptoms, care-first, weak AI</span>
+        </div>
+        <div style="padding: 8px 12px; background: white; border-radius: 6px; font-size: 15px;">
+          <strong>Coral</strong><br><span style="color: var(--text-light); font-size: 14px;">Telehealth menopause, narrow scope</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align: center;">
+    <p style="font-size: 14px; font-weight: 600; color: var(--navy);">None of our 5 Canadian competitors bridge both AI insight <span style="color: var(--coral);">AND</span> clinical execution.</p>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- SLIDE 11: WHY NOEVA IS DIFFERENT             -->
+<!-- ============================================ -->
+<div class="slide" data-slide="11" style="background: var(--bg);">
+  <div class="header-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 70" width="28" height="28"><defs><linearGradient id="hdr-g11" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#1B8A8A"/><stop offset="25%" stop-color="#1B8A8A"/><stop offset="50%" stop-color="#2E7BA8"/><stop offset="75%" stop-color="#D4826A"/><stop offset="100%" stop-color="#E86B5A"/></linearGradient></defs><path d="M 38 58 C 20 54, 8 44, 8 34 C 8 20, 20 10, 36 10 C 52 10, 62 20, 62 34 C 62 44, 54 52, 42 56" fill="none" stroke="url(#hdr-g11)" stroke-width="4" stroke-linecap="round"/></svg>
+  </div>
+  <div class="label" style="margin-top: 8px;">Value Proposition</div>
+  <h2 style="margin-bottom: 6px;">We don't replace providers</h2>
+  <p class="subtitle" style="margin-bottom: 28px;">We make patients easier to diagnose, treat, and support</p>
+
+  <div class="grid-3" style="margin-bottom: 24px;">
+    <div class="card" style="border-top: 3px solid var(--coral); text-align: center;">
+      <div style="font-size: 28px; margin-bottom: 8px;">&#x1F469;</div>
+      <h3 style="font-size: 15px; color: var(--coral);">For Patients</h3>
+      <ul style="list-style: none; margin-top: 12px; text-align: left;">
+        <li style="font-size: 15px; padding: 4px 0; display: flex; gap: 6px;"><span style="color: var(--coral);">&#x25CF;</span> Clear next steps instead of confusion</li>
+        <li style="font-size: 15px; padding: 4px 0; display: flex; gap: 6px;"><span style="color: var(--coral);">&#x25CF;</span> Prepared appointments</li>
+        <li style="font-size: 15px; padding: 4px 0; display: flex; gap: 6px;"><span style="color: var(--coral);">&#x25CF;</span> Being heard and validated</li>
+        <li style="font-size: 15px; padding: 4px 0; display: flex; gap: 6px;"><span style="color: var(--coral);">&#x25CF;</span> Months to diagnosis, not years</li>
+      </ul>
+    </div>
+    <div class="card" style="border-top: 3px solid var(--teal); text-align: center;">
+      <div style="font-size: 28px; margin-bottom: 8px;">&#x1F469;&#x200D;&#x2695;&#xFE0F;</div>
+      <h3 style="font-size: 15px; color: var(--teal);">For Providers</h3>
+      <ul style="list-style: none; margin-top: 12px; text-align: left;">
+        <li style="font-size: 15px; padding: 4px 0; display: flex; gap: 6px;"><span style="color: var(--teal);">&#x25CF;</span> Structured patient data pre-visit</li>
+        <li style="font-size: 15px; padding: 4px 0; display: flex; gap: 6px;"><span style="color: var(--teal);">&#x25CF;</span> Appropriate referral guidance</li>
+        <li style="font-size: 15px; padding: 4px 0; display: flex; gap: 6px;"><span style="color: var(--teal);">&#x25CF;</span> Reduced intake time</li>
+        <li style="font-size: 15px; padding: 4px 0; display: flex; gap: 6px;"><span style="color: var(--teal);">&#x25CF;</span> Evidence-based clinical signals</li>
+      </ul>
+    </div>
+    <div class="card" style="border-top: 3px solid var(--navy); text-align: center;">
+      <div style="font-size: 28px; margin-bottom: 8px;">&#x1F3E5;</div>
+      <h3 style="font-size: 15px; color: var(--navy);">For the System</h3>
+      <ul style="list-style: none; margin-top: 12px; text-align: left;">
+        <li style="font-size: 15px; padding: 4px 0; display: flex; gap: 6px;"><span style="color: var(--navy);">&#x25CF;</span> Reduced diagnostic delays</li>
+        <li style="font-size: 15px; padding: 4px 0; display: flex; gap: 6px;"><span style="color: var(--navy);">&#x25CF;</span> Lower downstream costs</li>
+        <li style="font-size: 15px; padding: 4px 0; display: flex; gap: 6px;"><span style="color: var(--navy);">&#x25CF;</span> Fewer unnecessary visits</li>
+        <li style="font-size: 15px; padding: 4px 0; display: flex; gap: 6px;"><span style="color: var(--navy);">&#x25CF;</span> Better resource allocation</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="background: var(--bg-cool); text-align: center; padding: 16px;">
+    <p style="font-size: 14px; font-weight: 500; color: var(--navy);">
+      &ldquo;A diagnostic acceleration layer that makes the existing healthcare system <strong style="color: var(--teal);">work faster</strong> for women.&rdquo;
+    </p>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- SLIDE 12: MOAT & IP                          -->
+<!-- ============================================ -->
+<div class="slide" data-slide="12" style="background: var(--bg-warm);">
+  <div class="header-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 70" width="28" height="28"><defs><linearGradient id="hdr-g12" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#1B8A8A"/><stop offset="25%" stop-color="#1B8A8A"/><stop offset="50%" stop-color="#2E7BA8"/><stop offset="75%" stop-color="#D4826A"/><stop offset="100%" stop-color="#E86B5A"/></linearGradient></defs><path d="M 38 58 C 20 54, 8 44, 8 34 C 8 20, 20 10, 36 10 C 52 10, 62 20, 62 34 C 62 44, 54 52, 42 56" fill="none" stroke="url(#hdr-g12)" stroke-width="4" stroke-linecap="round"/></svg>
+  </div>
+  <div class="label" style="margin-top: 8px;">Defensibility</div>
+  <h2 style="margin-bottom: 24px;">Four layers of compounding moat</h2>
+
+  <div class="moat-stack" style="margin-bottom: 24px;">
+    <div class="moat-layer">
+      <div class="moat-num">1</div>
+      <div>
+        <h3 style="font-size: 14px; margin-bottom: 2px;">Proprietary Longitudinal Data</h3>
+        <p style="font-size: 14px;">Every user interaction compounds the dataset. More data = better triage = more users. Network effects accelerate over time.</p>
+      </div>
+    </div>
+    <div class="moat-layer" style="border-left-color: var(--blue-mid);">
+      <div class="moat-num" style="background: var(--blue-mid);">2</div>
+      <div>
+        <h3 style="font-size: 14px; margin-bottom: 2px;">Closed-Loop AI + Clinical Validation</h3>
+        <p style="font-size: 14px;">No competitor connects AI insight to clinical execution. Our NP validation layer creates a feedback loop that continuously improves accuracy.</p>
+      </div>
+    </div>
+    <div class="moat-layer" style="border-left-color: var(--navy);">
+      <div class="moat-num" style="background: var(--navy);">3</div>
+      <div>
+        <h3 style="font-size: 14px; margin-bottom: 2px;">Evidence-Based Clinical Ontology</h3>
+        <p style="font-size: 14px;">62+ citations across Cochrane, ESHRE, SOGC, NICE, DSM-5. Covering 6 conditions with symptom prevalence data, diagnostic criteria, and care pathways.</p>
+      </div>
+    </div>
+    <div class="moat-layer" style="border-left-color: var(--coral);">
+      <div class="moat-num" style="background: var(--coral);">4</div>
+      <div>
+        <h3 style="font-size: 14px; margin-bottom: 2px;">Trust at the Moment of Highest Vulnerability</h3>
+        <p style="font-size: 14px;">Women at their most vulnerable choose Noeva. That trust converts to loyalty, referrals, and data that competitors can't buy.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card" style="background: white;">
+      <h3 style="font-size: 15px; margin-bottom: 6px;">IP Strategy</h3>
+      <ul style="list-style: none;">
+        <li style="font-size: 14px; padding: 3px 0; display: flex; gap: 6px;"><span style="color: var(--teal);">&#x2713;</span> Proprietary symptom ontology (trade secret)</li>
+        <li style="font-size: 14px; padding: 3px 0; display: flex; gap: 6px;"><span style="color: var(--teal);">&#x2713;</span> AI triage engine and clinical workflows</li>
+        <li style="font-size: 14px; padding: 3px 0; display: flex; gap: 6px;"><span style="color: var(--teal);">&#x2713;</span> Trademark filing planned (name + logo)</li>
+        <li style="font-size: 14px; padding: 3px 0; display: flex; gap: 6px;"><span style="color: var(--teal);">&#x2713;</span> Compounding longitudinal data asset</li>
+      </ul>
+    </div>
+    <div class="card" style="background: white;">
+      <h3 style="font-size: 15px; margin-bottom: 6px;">Data Sovereignty</h3>
+      <ul style="list-style: none;">
+        <li style="font-size: 14px; padding: 3px 0; display: flex; gap: 6px;"><span style="color: var(--teal);">&#x2713;</span> Canadian data residency (Google Cloud Montreal)</li>
+        <li style="font-size: 14px; padding: 3px 0; display: flex; gap: 6px;"><span style="color: var(--teal);">&#x2713;</span> PIPEDA-compliant privacy policy</li>
+        <li style="font-size: 14px; padding: 3px 0; display: flex; gap: 6px;"><span style="color: var(--teal);">&#x2713;</span> Explicit user consent + data deletion rights</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- SLIDE 13: TRACTION & MILESTONES              -->
+<!-- ============================================ -->
+<div class="slide" data-slide="13" style="background: var(--bg);">
+  <div class="header-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 70" width="28" height="28"><defs><linearGradient id="hdr-g13" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#1B8A8A"/><stop offset="25%" stop-color="#1B8A8A"/><stop offset="50%" stop-color="#2E7BA8"/><stop offset="75%" stop-color="#D4826A"/><stop offset="100%" stop-color="#E86B5A"/></linearGradient></defs><path d="M 38 58 C 20 54, 8 44, 8 34 C 8 20, 20 10, 36 10 C 52 10, 62 20, 62 34 C 62 44, 54 52, 42 56" fill="none" stroke="url(#hdr-g13)" stroke-width="4" stroke-linecap="round"/></svg>
+  </div>
+  <div class="label" style="margin-top: 8px;">Traction &amp; Milestones</div>
+  <h2 style="margin-bottom: 24px;">Built, validated, and ready to scale</h2>
+
+  <div class="grid-2">
+    <!-- DONE column -->
+    <div>
+      <h3 style="font-size: 14px; color: var(--teal); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+        <span style="background: var(--teal); color: white; padding: 2px 10px; border-radius: 4px; font-size: 14px;">COMPLETED</span>
+      </h3>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot done"></div>
+          <div>
+            <p style="font-size: 15px; font-weight: 600; color: var(--navy);">Customer Discovery</p>
+            <p style="font-size: 14px; color: var(--text-sub);">n=26 (21 survey + 5 interviews)</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot done"></div>
+          <div>
+            <p style="font-size: 15px; font-weight: 600; color: var(--navy);">MVP Built &amp; Functional</p>
+            <p style="font-size: 14px; color: var(--text-sub);">Clarity Engine live</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot done"></div>
+          <div>
+            <p style="font-size: 15px; font-weight: 600; color: var(--navy);">Clinical Ontology</p>
+            <p style="font-size: 14px; color: var(--text-sub);">62+ citations, 6 conditions</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot done"></div>
+          <div>
+            <p style="font-size: 15px; font-weight: 600; color: var(--navy);">Privacy &amp; Compliance</p>
+            <p style="font-size: 14px; color: var(--text-sub);">PIPEDA-compliant policy drafted</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot done"></div>
+          <div>
+            <p style="font-size: 15px; font-weight: 600; color: var(--navy);">Advisory Board Forming</p>
+            <p style="font-size: 14px; color: var(--text-sub);">Dr. Della Giustina confirmed</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEXT column -->
+    <div>
+      <h3 style="font-size: 14px; color: var(--coral); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+        <span style="background: var(--coral); color: white; padding: 2px 10px; border-radius: 4px; font-size: 14px;">NEXT 12 MONTHS</span>
+      </h3>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot future"></div>
+          <div>
+            <p style="font-size: 15px; font-weight: 600; color: var(--navy);">Month 1&ndash;2: Beta Launch</p>
+            <p style="font-size: 14px; color: var(--text-sub);">20&ndash;50 users, clinician interviews (8&ndash;10)</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot future"></div>
+          <div>
+            <p style="font-size: 15px; font-weight: 600; color: var(--navy);">Month 3&ndash;4: Public Launch</p>
+            <p style="font-size: 14px; color: var(--text-sub);">First revenue, user growth</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot future"></div>
+          <div>
+            <p style="font-size: 15px; font-weight: 600; color: var(--navy);">Month 5&ndash;6: Phase 1b</p>
+            <p style="font-size: 14px; color: var(--text-sub);">NP clinical validation layer live</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot future"></div>
+          <div>
+            <p style="font-size: 15px; font-weight: 600; color: var(--navy);">Month 7&ndash;12: Scale</p>
+            <p style="font-size: 14px; color: var(--text-sub);">500+ users, employer/insurer pilots</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- SLIDE 14: TEAM                               -->
+<!-- ============================================ -->
+<div class="slide" data-slide="14" style="background: var(--bg-cool);">
+  <div class="header-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 70" width="28" height="28"><defs><linearGradient id="hdr-g14" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#1B8A8A"/><stop offset="25%" stop-color="#1B8A8A"/><stop offset="50%" stop-color="#2E7BA8"/><stop offset="75%" stop-color="#D4826A"/><stop offset="100%" stop-color="#E86B5A"/></linearGradient></defs><path d="M 38 58 C 20 54, 8 44, 8 34 C 8 20, 20 10, 36 10 C 52 10, 62 20, 62 34 C 62 44, 54 52, 42 56" fill="none" stroke="url(#hdr-g14)" stroke-width="4" stroke-linecap="round"/></svg>
+  </div>
+  <div class="label" style="margin-top: 8px;">Team</div>
+  <h2 style="margin-bottom: 6px;">A scientist building a science-based solution</h2>
+  <p class="subtitle" style="margin-bottom: 28px;">Deep domain expertise + accelerator support + growing advisory board</p>
+
+  <div class="grid-2" style="margin-bottom: 24px;">
+    <div class="card" style="background: white; border-top: 3px solid var(--teal);">
+      <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 12px;">
+        <div style="width: 56px; height: 56px; border-radius: 50%; background: var(--gradient-teal); display: flex; align-items: center; justify-content: center; color: white; font-size: 22px; font-weight: 700;">EM</div>
+        <div>
+          <h3 style="font-size: 16px; margin-bottom: 2px;">Eveline Menezes</h3>
+          <p style="font-size: 14px; color: var(--teal); font-weight: 600;">Founder &amp; CEO</p>
+        </div>
+      </div>
+      <ul style="list-style: none;">
+        <li style="font-size: 15px; padding: 3px 0; display: flex; gap: 6px;"><span style="color: var(--teal);">&#x25CF;</span> PhD Kinesiology and Muscle Physiology, Queen&rsquo;s University | MSc in Molecular Biology</li>
+        <li style="font-size: 15px; padding: 3px 0; display: flex; gap: 6px;"><span style="color: var(--teal);">&#x25CF;</span> 10+ years in Life Sciences</li>
+        <li style="font-size: 15px; padding: 3px 0; display: flex; gap: 6px;"><span style="color: var(--teal);">&#x25CF;</span> Solo founder &mdash; driven by lived experience</li>
+      </ul>
+    </div>
+    <div class="card" style="background: white; border-top: 3px solid var(--blue-mid);">
+      <h3 style="font-size: 14px; margin-bottom: 12px;">Scientific Advisory</h3>
+      <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 12px;">
+        <div style="width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--blue-mid), var(--navy)); display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; font-weight: 700;">AD</div>
+        <div>
+          <p style="font-size: 15px; font-weight: 600;">Amanda Della Giustina, PhD</p>
+          <p style="font-size: 14px; color: var(--text-sub);">Translational Researcher | Neuroscience, Oncology &amp; Metabolism | Women&rsquo;s Health (Endometriosis)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="background: white; margin-bottom: 24px;">
+    <h3 style="font-size: 14px; margin-bottom: 8px;">Programs &amp; Support</h3>
+    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+      <span class="badge badge-teal">Innovation Factory Catalyst</span>
+      <span class="badge badge-teal">Spring Build</span>
+    </div>
+  </div>
+
+  <div class="card" style="background: white;">
+    <h3 style="font-size: 14px; margin-bottom: 12px;">Post-Funding Hiring Plan</h3>
+    <div class="grid-3">
+      <div style="text-align: center; padding: 8px;">
+        <div style="font-size: 24px; margin-bottom: 4px;">&#x1F4BB;</div>
+        <p style="font-size: 15px; font-weight: 600; color: var(--navy);">CTO</p>
+        <p style="font-size: 14px; color: var(--text-sub);">AI/ML engineering lead</p>
+      </div>
+      <div style="text-align: center; padding: 8px;">
+        <div style="font-size: 24px; margin-bottom: 4px;">&#x1F469;&#x200D;&#x2695;&#xFE0F;</div>
+        <p style="font-size: 15px; font-weight: 600; color: var(--navy);">Clinical Lead NP</p>
+        <p style="font-size: 14px; color: var(--text-sub);">Validation + protocols</p>
+      </div>
+      <div style="text-align: center; padding: 8px;">
+        <div style="font-size: 24px; margin-bottom: 4px;">&#x1F3A8;</div>
+        <p style="font-size: 15px; font-weight: 600; color: var(--navy);">Product Designer</p>
+        <p style="font-size: 14px; color: var(--text-sub);">UX + patient experience</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- SLIDE 15: THE ASK                            -->
+<!-- ============================================ -->
+<div class="slide" data-slide="15" style="background: var(--bg);">
+  <div class="header-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 70" width="28" height="28"><defs><linearGradient id="hdr-g15" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#1B8A8A"/><stop offset="25%" stop-color="#1B8A8A"/><stop offset="50%" stop-color="#2E7BA8"/><stop offset="75%" stop-color="#D4826A"/><stop offset="100%" stop-color="#E86B5A"/></linearGradient></defs><path d="M 38 58 C 20 54, 8 44, 8 34 C 8 20, 20 10, 36 10 C 52 10, 62 20, 62 34 C 62 44, 54 52, 42 56" fill="none" stroke="url(#hdr-g15)" stroke-width="4" stroke-linecap="round"/></svg>
+  </div>
+  <div class="label" style="margin-top: 8px;">The Ask</div>
+  <h2 style="margin-bottom: 6px;">Investment to accelerate from beta to early traction</h2>
+  <p class="subtitle" style="margin-bottom: 28px;">First-mover in Canadian AI-powered diagnostic acceleration for women's health</p>
+
+  <div class="grid-4" style="margin-bottom: 28px;">
+    <div class="card card-teal" style="text-align: center;">
+      <div style="font-size: 28px; margin-bottom: 8px;">&#x2699;&#xFE0F;</div>
+      <h3 style="font-size: 15px;">Product Development</h3>
+      <p style="font-size: 14px; color: var(--text-sub); margin-top: 6px;">Scale AI engine, expand condition coverage, hire CTO</p>
+    </div>
+    <div class="card card-teal" style="text-align: center;">
+      <div style="font-size: 28px; margin-bottom: 8px;">&#x1F3E5;</div>
+      <h3 style="font-size: 15px;">Clinical Partnerships</h3>
+      <p style="font-size: 14px; color: var(--text-sub); margin-top: 6px;">NP network, clinician interviews, validation studies</p>
+    </div>
+    <div class="card card-coral" style="text-align: center;">
+      <div style="font-size: 28px; margin-bottom: 8px;">&#x1F4CA;</div>
+      <h3 style="font-size: 15px;">Pilot Validation</h3>
+      <p style="font-size: 14px; color: var(--text-sub); margin-top: 6px;">Measure diagnostic time reduction, outcome data</p>
+    </div>
+    <div class="card card-coral" style="text-align: center;">
+      <div style="font-size: 28px; margin-bottom: 8px;">&#x1F680;</div>
+      <h3 style="font-size: 15px;">Go-to-Market</h3>
+      <p style="font-size: 14px; color: var(--text-sub); margin-top: 6px;">User acquisition, community building, B2B pilots</p>
+    </div>
+  </div>
+
+  <div class="card" style="background: var(--bg-cool); text-align: center; padding: 24px;">
+    <h3 style="font-size: 16px; margin-bottom: 16px;">Key Unlocks with This Investment</h3>
+    <div class="grid-3">
+      <div>
+        <div class="stat-med stat-teal">500+</div>
+        <div class="stat-label">First paying users</div>
+      </div>
+      <div>
+        <div class="stat-med stat-coral" style="font-size: 26px;">Measured</div>
+        <div class="stat-label">Diagnostic time reduction</div>
+      </div>
+      <div>
+        <div class="stat-med stat-navy" style="font-size: 26px;">B2B Pilot</div>
+        <div class="stat-label">Employer / insurer validation</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- SLIDE 16: CLOSING                            -->
+<!-- ============================================ -->
+<div class="slide slide-closing" data-slide="16">
+  <div style="max-width: 600px;">
+    <div style="margin-bottom: 32px;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 70" width="300" height="62">
+        <defs><linearGradient id="fl-g2" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#1B8A8A"/><stop offset="25%" stop-color="#1B8A8A"/><stop offset="50%" stop-color="#2E7BA8"/><stop offset="75%" stop-color="#D4826A"/><stop offset="100%" stop-color="#E86B5A"/></linearGradient></defs>
+        <path d="M 38 58 C 20 54, 8 44, 8 34 C 8 20, 20 10, 36 10 C 52 10, 62 20, 62 34 C 62 44, 54 52, 42 56" fill="none" stroke="url(#fl-g2)" stroke-width="4" stroke-linecap="round"/>
+        <text x="78" y="42" font-family="Poppins, sans-serif" font-weight="300" font-size="28" fill="#1B4A5E" letter-spacing="1">Noeva</text>
+        <text x="185" y="42" font-family="Poppins, sans-serif" font-weight="500" font-size="28" fill="#1B4A5E" letter-spacing="1">Health</text>
+      </svg>
+    </div>
+
+    <p style="font-size: 20px; font-weight: 400; color: var(--text-sub); line-height: 1.6; margin-bottom: 8px;">
+      The gap between symptoms and diagnosis<br>costs women <strong style="color: var(--coral);">years of their lives</strong>.
+    </p>
+
+    <p style="font-size: 24px; font-weight: 700; color: var(--navy); margin-bottom: 32px;">
+      Noeva closes that gap.
+    </p>
+
+    <div style="width: 48px; height: 2px; background: var(--gradient-hero); margin: 0 auto 24px;"></div>
+
+    <p style="font-size: 15px; font-weight: 500; color: var(--navy); margin-bottom: 4px;">Eveline Menezes, PhD &mdash; Founder &amp; CEO</p>
+    <p style="font-size: 13px; color: var(--text-sub);">menezes@noevahealth.com &nbsp;|&nbsp; noevahealth.com</p>
+  </div>
+</div>
+
+</div><!-- /deck -->
+
+<!-- NAV -->
+<div class="nav-arrows">
+  <button onclick="prev()" aria-label="Previous slide">&#x2190;</button>
+  <button onclick="next()" aria-label="Next slide">&#x2192;</button>
+</div>
+<div class="slide-counter" id="counter">1 / 16</div>
+
+<script>
+(function(){
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let cur = 0;
+
+  function show(n) {
+    slides[cur].classList.remove('active');
+    cur = Math.max(0, Math.min(n, total - 1));
+    slides[cur].classList.add('active');
+    document.getElementById('counter').textContent = (cur + 1) + ' / ' + total;
+    document.getElementById('progressBar').style.width = ((cur + 1) / total * 100) + '%';
+  }
+
+  window.next = function(){ show(cur + 1); };
+  window.prev = function(){ show(cur - 1); };
+
+  // Keyboard
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); next(); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); prev(); }
+    if (e.key === 'Home') { e.preventDefault(); show(0); }
+    if (e.key === 'End') { e.preventDefault(); show(total - 1); }
+  });
+
+  // Click (right half = next, left half = prev)
+  document.querySelector('.deck').addEventListener('click', function(e){
+    if (e.target.closest('.nav-arrows') || e.target.closest('a') || e.target.closest('button')) return;
+    if (e.clientX > window.innerWidth * 0.5) next(); else prev();
+  });
+
+  // Touch swipe
+  let tx = 0;
+  document.addEventListener('touchstart', function(e){ tx = e.touches[0].clientX; }, {passive: true});
+  document.addEventListener('touchend', function(e){
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 50) { dx < 0 ? next() : prev(); }
+  }, {passive: true});
+
+  // Init progress bar
+  document.getElementById('progressBar').style.width = (1 / total * 100) + '%';
+})();
+</script>
+
+</body>
+</html>
