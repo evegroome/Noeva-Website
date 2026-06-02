@@ -1,0 +1,1309 @@
+<!-- NOEVA HEALTH WEBSITE MOCKUP — Use this as visual reference when building in IONOS. Copy colors, fonts, layout, and text. -->
+<!-- NOTE: The waitlist form and contact form are visual mockups only. Connect them to your IONOS form handler, Mailchimp, or ConvertKit. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Noeva Health - AI-powered diagnostic acceleration for women's health. Her Health Discovered Sooner.">
+<title>Noeva Health - Her Health Discovered Sooner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   NOEVA HEALTH - BRAND TOKENS
+   Teal: #1B8A8A
+   Navy: #1B4A5E
+   Coral: #E86B5A
+   Light Coral: #F0907A
+   Off-white: #F7F8FC
+   Text: #2D3748
+   Light text: #718096
+   Font: Poppins 300/400/500/600/700
+   ============================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: #2D3748;
+  line-height: 1.7;
+  background: #F7F8FC;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; }
+
+a {
+  color: #1B8A8A;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+a:hover { color: #E86B5A; }
+
+/* ---- UTILITY ---- */
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section-padding {
+  padding: 100px 0;
+}
+
+.section-title {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #1B4A5E;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: #718096;
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 48px;
+  font-weight: 400;
+  line-height: 1.8;
+}
+
+/* ---- ANIMATIONS ---- */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 1px 8px rgba(27,74,94,0.08);
+  transition: box-shadow 0.3s;
+}
+
+.navbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+.nav-logo svg { display: block; }
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 32px;
+  align-items: center;
+}
+
+.nav-links a {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #2D3748;
+  transition: color 0.2s;
+  letter-spacing: 0.3px;
+}
+.nav-links a:hover { color: #1B8A8A; }
+
+.nav-links .nav-cta {
+  background: #E86B5A;
+  color: #fff;
+  padding: 10px 24px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: background 0.2s, transform 0.2s;
+}
+.nav-links .nav-cta:hover {
+  background: #F0907A;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 8px;
+}
+.hamburger span {
+  display: block;
+  width: 26px;
+  height: 2.5px;
+  background: #1B4A5E;
+  border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+/* Mobile Nav */
+@media (max-width: 768px) {
+  .hamburger { display: flex; }
+  .nav-links {
+    position: fixed;
+    top: 72px;
+    left: 0;
+    right: 0;
+    background: #fff;
+    flex-direction: column;
+    padding: 24px;
+    gap: 20px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    transform: translateY(-120%);
+    transition: transform 0.35s ease;
+    z-index: 999;
+  }
+  .nav-links.open {
+    transform: translateY(0);
+  }
+  .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+}
+
+/* ============================================
+   SECTION 1: HERO
+   ============================================ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(135deg, #1B4A5E 0%, #1B8A8A 60%, #2E7BA8 100%);
+  padding: 120px 24px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,107,90,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-content {
+  max-width: 760px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-logo {
+  margin-bottom: 40px;
+}
+.hero-logo svg {
+  width: 260px;
+  height: auto;
+}
+
+.hero h1 {
+  font-size: 3.2rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.88);
+  margin-bottom: 40px;
+  line-height: 1.8;
+}
+
+.hero-cta {
+  display: inline-block;
+  background: #E86B5A;
+  color: #fff;
+  padding: 18px 48px;
+  border-radius: 40px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(232,107,90,0.35);
+  letter-spacing: 0.3px;
+}
+.hero-cta:hover {
+  background: #F0907A;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(232,107,90,0.45);
+}
+
+.hero-subtext {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.6);
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2.2rem; }
+  .hero p { font-size: 1rem; }
+  .hero-logo svg { width: 200px; }
+}
+
+/* ============================================
+   SECTION 2: THE PROBLEM (stats)
+   ============================================ */
+.problem-stats {
+  background: #fff;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-bottom: 32px;
+}
+
+.stat-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 40px 32px;
+  text-align: center;
+  box-shadow: 0 4px 24px rgba(27,74,94,0.07);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 36px rgba(27,74,94,0.12);
+}
+
+.stat-number {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+.stat-number.teal { color: #1B8A8A; }
+.stat-number.coral { color: #E86B5A; }
+
+.stat-label {
+  font-size: 0.95rem;
+  color: #718096;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.sources {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #a0aec0;
+  font-weight: 300;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .stats-grid { grid-template-columns: 1fr; gap: 20px; }
+  .stat-number { font-size: 2.4rem; }
+}
+
+/* ============================================
+   SECTION 3: WHAT WE'RE BUILDING
+   ============================================ */
+.building {
+  background: #F7F8FC;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.feature-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 36px 28px;
+  border-left: 4px solid #1B8A8A;
+  box-shadow: 0 2px 16px rgba(27,74,94,0.06);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.feature-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 28px rgba(27,74,94,0.1);
+}
+
+.feature-icon {
+  font-size: 2.2rem;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.feature-card h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #1B4A5E;
+  margin-bottom: 12px;
+}
+
+.feature-card p {
+  font-size: 0.93rem;
+  color: #718096;
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .features-grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================
+   SECTION 4: WHO IT'S FOR
+   ============================================ */
+.who-for {
+  background: #E8F5F5;
+}
+
+.condition-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 36px;
+}
+
+.condition-tag {
+  background: #1B8A8A;
+  color: #fff;
+  padding: 10px 24px;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+/* ============================================
+   SECTION 5: ABOUT
+   ============================================ */
+.about {
+  background: #fff;
+}
+
+.mission-statement {
+  font-size: 1.35rem;
+  font-style: italic;
+  color: #1B4A5E;
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 64px;
+  font-weight: 400;
+  line-height: 1.8;
+}
+
+.bios-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 64px;
+}
+
+.bio-card { text-align: center; }
+
+.bio-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 1px;
+}
+.bio-avatar.teal-bg {
+  background: linear-gradient(135deg, #1B8A8A, #2E7BA8);
+}
+.bio-avatar.coral-bg {
+  background: linear-gradient(135deg, #E86B5A, #F0907A);
+}
+
+.bio-card h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #1B4A5E;
+  margin-bottom: 4px;
+}
+
+.bio-role {
+  font-size: 0.9rem;
+  color: #1B8A8A;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.bio-card p:last-of-type {
+  font-size: 0.9rem;
+  color: #718096;
+  line-height: 1.75;
+  text-align: left;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.value-card {
+  background: #F7F8FC;
+  border-radius: 12px;
+  padding: 28px 20px;
+  text-align: center;
+}
+
+.value-card h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1B4A5E;
+  margin-bottom: 8px;
+}
+
+.value-card p {
+  font-size: 0.85rem;
+  color: #718096;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .bios-grid { grid-template-columns: 1fr; gap: 40px; }
+  .values-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .values-grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================
+   SECTION 6: WHY WOMEN WAIT
+   ============================================ */
+.deeper-problem {
+  background: #F7F8FC;
+}
+
+.problem-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.problem-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 32px 28px;
+  box-shadow: 0 2px 12px rgba(27,74,94,0.06);
+}
+
+.problem-card h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #1B4A5E;
+  margin-bottom: 10px;
+}
+
+.problem-card p {
+  font-size: 0.9rem;
+  color: #718096;
+  line-height: 1.7;
+}
+
+.closing-quote {
+  text-align: center;
+  font-size: 1.05rem;
+  color: #1B4A5E;
+  font-style: italic;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 24px 0;
+  border-top: 2px solid #E8F5F5;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .problem-cards { grid-template-columns: 1fr; }
+}
+
+/* ============================================
+   SECTION 7: WAITLIST
+   ============================================ */
+.waitlist {
+  background: linear-gradient(135deg, #1B8A8A 0%, #1B4A5E 100%);
+  color: #fff;
+}
+
+.waitlist .section-title { color: #fff; }
+.waitlist .section-subtitle { color: rgba(255,255,255,0.85); }
+
+.waitlist-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.waitlist-benefits {
+  padding-top: 16px;
+}
+
+.waitlist-benefits ul {
+  list-style: none;
+  margin-top: 24px;
+}
+
+.waitlist-benefits li {
+  font-size: 1rem;
+  margin-bottom: 18px;
+  padding-left: 32px;
+  position: relative;
+  color: rgba(255,255,255,0.92);
+  font-weight: 400;
+}
+.waitlist-benefits li::before {
+  content: '\2713';
+  position: absolute;
+  left: 0;
+  color: #F0907A;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.waitlist-form-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 40px 36px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #2D3748;
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  color: #2D3748;
+  background: #F7F8FC;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #1B8A8A;
+  box-shadow: 0 0 0 3px rgba(27,138,138,0.12);
+}
+
+.form-group textarea { resize: vertical; min-height: 100px; }
+
+.checkbox-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.checkbox-group input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+  accent-color: #1B8A8A;
+  flex-shrink: 0;
+}
+.checkbox-group label {
+  font-size: 0.82rem;
+  color: #718096;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.btn-submit {
+  display: block;
+  width: 100%;
+  background: #E86B5A;
+  color: #fff;
+  border: none;
+  padding: 16px;
+  border-radius: 30px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  letter-spacing: 0.3px;
+}
+.btn-submit:hover {
+  background: #F0907A;
+  transform: translateY(-1px);
+}
+
+.form-note {
+  margin-top: 16px;
+  font-size: 0.75rem;
+  color: #a0aec0;
+  text-align: center;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .waitlist-content { grid-template-columns: 1fr; }
+}
+
+/* ============================================
+   SECTION 8: FOR CLINICIANS
+   ============================================ */
+.clinicians {
+  background: #fff;
+}
+
+.clinicians-content {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.clinicians-content p {
+  font-size: 1rem;
+  color: #718096;
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+.btn-clinician {
+  display: inline-block;
+  background: #1B4A5E;
+  color: #fff;
+  padding: 16px 40px;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.2s;
+  letter-spacing: 0.3px;
+}
+.btn-clinician:hover {
+  background: #1B8A8A;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* ============================================
+   SECTION 9: CONTACT
+   ============================================ */
+.contact {
+  background: #F7F8FC;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+
+.contact-info h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #1B4A5E;
+  margin-bottom: 24px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.contact-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #E8F5F5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.contact-item-text {
+  font-size: 0.95rem;
+  color: #2D3748;
+}
+.contact-item-text small {
+  display: block;
+  color: #718096;
+  font-size: 0.82rem;
+}
+
+.contact-form-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 36px 32px;
+  box-shadow: 0 2px 16px rgba(27,74,94,0.06);
+}
+
+@media (max-width: 768px) {
+  .contact-grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+  background: #1B4A5E;
+  color: rgba(255,255,255,0.8);
+  padding: 60px 0 32px;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 32px;
+  margin-bottom: 40px;
+}
+
+.footer-brand {
+  max-width: 320px;
+}
+
+.footer-brand svg { margin-bottom: 16px; }
+
+.footer-tagline {
+  font-size: 1rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 16px;
+}
+
+.footer-email a {
+  color: #F0907A;
+  font-size: 0.9rem;
+}
+.footer-email a:hover { color: #E86B5A; }
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.footer-links a {
+  color: rgba(255,255,255,0.7);
+  font-size: 0.9rem;
+  font-weight: 400;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: #fff; }
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-disclaimer {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.45);
+  font-weight: 300;
+  max-width: 480px;
+}
+
+.footer-copy {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.45);
+  font-weight: 300;
+}
+
+@media (max-width: 768px) {
+  .footer-top { flex-direction: column; align-items: center; text-align: center; }
+  .footer-links { justify-content: center; }
+  .footer-bottom { flex-direction: column; align-items: center; text-align: center; }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+@media print {
+  .navbar, .hamburger { display: none !important; }
+  .hero { min-height: auto; padding: 40px 24px; }
+  body { font-size: 11pt; }
+  .section-padding { padding: 40px 0; }
+  .animate-on-scroll { opacity: 1 !important; transform: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================
+     NAVIGATION
+     ============================ -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <a href="#hero" class="nav-logo" aria-label="Noeva Health - Home">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 70" width="180" height="37">
+        <defs><linearGradient id="nav-g" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#1B8A8A"/><stop offset="25%" stop-color="#1B8A8A"/><stop offset="50%" stop-color="#2E7BA8"/><stop offset="75%" stop-color="#D4826A"/><stop offset="100%" stop-color="#E86B5A"/></linearGradient></defs>
+        <path d="M 38 58 C 20 54, 8 44, 8 34 C 8 20, 20 10, 36 10 C 52 10, 62 20, 62 34 C 62 44, 54 52, 42 56" fill="none" stroke="url(#nav-g)" stroke-width="4" stroke-linecap="round"/>
+        <text x="78" y="42" font-family="Poppins, sans-serif" font-weight="300" font-size="28" fill="#1B4A5E" letter-spacing="1">Noeva</text>
+        <text x="185" y="42" font-family="Poppins, sans-serif" font-weight="500" font-size="28" fill="#1B4A5E" letter-spacing="1">Health</text>
+      </svg>
+    </a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#problem">The Problem</a></li>
+      <li><a href="#waitlist">Waitlist</a></li>
+      <li><a href="#clinicians">For Clinicians</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#waitlist" class="nav-cta">Join Waitlist</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ============================
+     SECTION 1: HERO
+     ============================ -->
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <div class="hero-logo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 70" width="260" height="54">
+        <defs><linearGradient id="hero-g" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#fff"/><stop offset="25%" stop-color="#fff"/><stop offset="50%" stop-color="rgba(255,255,255,0.8)"/><stop offset="75%" stop-color="#F0907A"/><stop offset="100%" stop-color="#E86B5A"/></linearGradient></defs>
+        <path d="M 38 58 C 20 54, 8 44, 8 34 C 8 20, 20 10, 36 10 C 52 10, 62 20, 62 34 C 62 44, 54 52, 42 56" fill="none" stroke="url(#hero-g)" stroke-width="4" stroke-linecap="round"/>
+        <text x="78" y="42" font-family="Poppins, sans-serif" font-weight="300" font-size="28" fill="#fff" letter-spacing="1">Noeva</text>
+        <text x="185" y="42" font-family="Poppins, sans-serif" font-weight="500" font-size="28" fill="#fff" letter-spacing="1">Health</text>
+      </svg>
+    </div>
+    <h1>Her Health Discovered Sooner.</h1>
+    <p>Women in Canada wait 7 to 10 years to get diagnosed with conditions like endometriosis. We're building the AI-powered tool that closes that gap.</p>
+    <a href="#waitlist" class="hero-cta">Join the Waitlist</a>
+    <p class="hero-subtext">Launching soon across Canada.</p>
+  </div>
+</section>
+
+<!-- ============================
+     SECTION 2: THE PROBLEM (stats)
+     ============================ -->
+<section class="problem-stats section-padding" id="problem">
+  <div class="container">
+    <h2 class="section-title">The Diagnostic Gap Is Real</h2>
+    <p class="section-subtitle">Despite universal healthcare, millions of Canadian women experience persistent symptoms and struggle to get clear answers. The system is fragmented. Symptoms are dismissed. Information gets lost between providers.</p>
+    <div class="stats-grid">
+      <div class="stat-card animate-on-scroll">
+        <div class="stat-number teal">7-10 years</div>
+        <p class="stat-label">Average diagnostic delay for endometriosis</p>
+      </div>
+      <div class="stat-card animate-on-scroll">
+        <div class="stat-number coral">52%</div>
+        <p class="stat-label">Of women feel their symptoms are not taken seriously at all</p>
+      </div>
+      <div class="stat-card animate-on-scroll">
+        <div class="stat-number teal">10 million</div>
+        <p class="stat-label">Canadian women report healthcare doesn't meet their needs</p>
+      </div>
+    </div>
+    <p class="sources">Sources: SOGC, Maple/Angus Reid 2025, Noeva Health Customer Discovery (n=26)</p>
+  </div>
+</section>
+
+<!-- ============================
+     SECTION 3: WHAT WE'RE BUILDING
+     ============================ -->
+<section class="building section-padding" id="building">
+  <div class="container">
+    <h2 class="section-title">From Symptoms to Clear Next Steps</h2>
+    <p class="section-subtitle">Noeva Health is building an AI-powered diagnostic acceleration platform. We help women understand their symptoms, identify likely conditions, and know exactly what to do next &mdash; what tests to request, what specialist to see, and how urgent it is. We're not replacing your doctor. We're making sure you arrive at your appointment prepared, prioritized, and impossible to dismiss.</p>
+    <div class="features-grid">
+      <div class="feature-card animate-on-scroll">
+        <span class="feature-icon" aria-hidden="true">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="17" cy="17" r="12" stroke="#1B8A8A" stroke-width="2.5"/><line x1="26" y1="26" x2="36" y2="36" stroke="#1B8A8A" stroke-width="2.5" stroke-linecap="round"/><circle cx="17" cy="17" r="5" stroke="#E86B5A" stroke-width="1.5" stroke-dasharray="3 2"/></svg>
+        </span>
+        <h3>AI-Powered Analysis</h3>
+        <p>Your symptoms analyzed against a clinical evidence base covering endometriosis, PMOS, perimenopause, menopause, PMDD, and adenomyosis.</p>
+      </div>
+      <div class="feature-card animate-on-scroll">
+        <span class="feature-icon" aria-hidden="true">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="8" y="6" width="24" height="28" rx="3" stroke="#1B8A8A" stroke-width="2.5"/><line x1="14" y1="14" x2="26" y2="14" stroke="#E86B5A" stroke-width="2" stroke-linecap="round"/><line x1="14" y1="20" x2="26" y2="20" stroke="#1B8A8A" stroke-width="2" stroke-linecap="round"/><line x1="14" y1="26" x2="22" y2="26" stroke="#1B8A8A" stroke-width="2" stroke-linecap="round"/><polyline points="12,14 13.5,15.5 16,12" stroke="#E86B5A" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <h3>Clear Next Steps</h3>
+        <p>Not just information &mdash; actionable guidance. What tests to ask for, what type of provider to see, and how urgent your situation is.</p>
+      </div>
+      <div class="feature-card animate-on-scroll">
+        <span class="feature-icon" aria-hidden="true">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="6" y="4" width="28" height="32" rx="3" stroke="#1B8A8A" stroke-width="2.5"/><line x1="12" y1="12" x2="28" y2="12" stroke="#718096" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="18" x2="28" y2="18" stroke="#718096" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="24" x2="24" y2="24" stroke="#718096" stroke-width="1.5" stroke-linecap="round"/><rect x="22" y="26" width="12" height="12" rx="2" fill="#E86B5A"/><polyline points="25,32 28,35 33,29" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <h3>Appointment Ready</h3>
+        <p>A structured, printable document that organizes your symptoms, history, and recommended next steps for your doctor.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SECTION 4: WHO IT'S FOR
+     ============================ -->
+<section class="who-for section-padding" id="who">
+  <div class="container">
+    <h2 class="section-title">Built for Women Who Deserve Answers</h2>
+    <p class="section-subtitle">Noeva is for women in Canada experiencing persistent, unexplained symptoms who have been told &ldquo;it's probably just stress,&rdquo; who have waited months for referrals, and who have researched online only to find contradictory information. If you've ever felt like something is wrong but no one is listening &mdash; Noeva is being built for you.</p>
+    <div class="condition-tags">
+      <span class="condition-tag">Endometriosis</span>
+      <span class="condition-tag">PMOS</span>
+      <span class="condition-tag">Perimenopause</span>
+      <span class="condition-tag">Menopause</span>
+      <span class="condition-tag">PMDD</span>
+      <span class="condition-tag">Adenomyosis</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SECTION 5: ABOUT
+     ============================ -->
+<section class="about section-padding" id="about">
+  <div class="container">
+    <h2 class="section-title">Our Mission</h2>
+    <p class="mission-statement">&ldquo;To help women understand their symptoms sooner, act earlier, and avoid preventable suffering.&rdquo;</p>
+
+    <div class="bios-grid">
+      <div class="bio-card animate-on-scroll">
+        <img src="data:image/jpeg;base64,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" alt="Eveline Menezes" style="width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid #1B8A8A;">
+        <h3>Eveline Soares Menezes, PhD</h3>
+        <p class="bio-role">Founder &amp; CEO</p>
+        <p>Eveline is a Brazilian scientist with a PhD in Kinesiology and Muscle Physiology from Queen's University and over 10 years of research in life sciences. She pivoted from academia to entrepreneurship after witnessing women suffer years of diagnostic delays for conditions like endometriosis and PMOS. Eveline is part of Innovation Factory's Catalyst program and Spring Build, and is currently building Noeva's AI-powered Clarity Engine. She believes clarity is a form of care.</p>
+      </div>
+      <div class="bio-card animate-on-scroll">
+        <div class="bio-avatar coral-bg">AG</div>
+        <h3>Amanda Della Giustina, PhD</h3>
+        <p class="bio-role">Scientific Advisory Committee</p>
+        <p>With over 12 years of preclinical and clinical research experience, Amanda ensures that Noeva's AI engine is grounded in the latest evidence.</p>
+      </div>
+    </div>
+
+    <div class="values-grid">
+      <div class="value-card animate-on-scroll">
+        <h4>Clarity as Care</h4>
+        <p>Giving someone a clear next step is itself an act of compassion.</p>
+      </div>
+      <div class="value-card animate-on-scroll">
+        <h4>Deliver, Don't Promise</h4>
+        <p>We build things that work. No hype.</p>
+      </div>
+      <div class="value-card animate-on-scroll">
+        <h4>Being Heard</h4>
+        <p>Every woman should feel that someone is finally listening.</p>
+      </div>
+      <div class="value-card animate-on-scroll">
+        <h4>Evidence First</h4>
+        <p>Our AI is built on 62+ clinical citations. We don't guess.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SECTION 6: WHY WOMEN WAIT
+     ============================ -->
+<section class="deeper-problem section-padding" id="deeper-problem">
+  <div class="container">
+    <h2 class="section-title">Why Women Wait Years for Answers</h2>
+    <div class="problem-cards">
+      <div class="problem-card animate-on-scroll">
+        <h3>Symptoms Are Dismissed</h3>
+        <p>52% of women in our research felt symptoms were not taken seriously at all.</p>
+      </div>
+      <div class="problem-card animate-on-scroll">
+        <h3>The System Is Fragmented</h3>
+        <p>Women see multiple providers, wait months for referrals, undergo disconnected tests without a clear plan.</p>
+      </div>
+      <div class="problem-card animate-on-scroll">
+        <h3>Research Is Behind</h3>
+        <p>Only 4% of healthcare R&amp;D globally targets women's health.</p>
+      </div>
+      <div class="problem-card animate-on-scroll">
+        <h3>No Structured Pathway</h3>
+        <p>Unlike cardiac or cancer care, women's health conditions lack standardized diagnostic protocols.</p>
+      </div>
+    </div>
+    <p class="closing-quote">&ldquo;The World Economic Forum estimates closing the women's health gap could boost the global economy by $1 trillion annually.&rdquo;</p>
+  </div>
+</section>
+
+<!-- ============================
+     SECTION 7: WAITLIST
+     ============================ -->
+<section class="waitlist section-padding" id="waitlist">
+  <div class="container">
+    <h2 class="section-title">Get Early Access</h2>
+    <p class="section-subtitle">Noeva Health is launching soon across Canada. Join the waitlist to be among the first to try our AI-powered diagnostic acceleration tool.</p>
+    <div class="waitlist-content">
+      <div class="waitlist-benefits">
+        <ul>
+          <li>Get first access to the platform</li>
+          <li>Help shape the product with your feedback</li>
+          <li>Lock in founding member pricing</li>
+        </ul>
+      </div>
+      <div class="waitlist-form-card">
+        <form onsubmit="event.preventDefault(); alert('This is a visual mockup. Connect this form to your IONOS form handler or Mailchimp/ConvertKit.');">
+          <div class="form-group">
+            <label for="wl-name">First name</label>
+            <input type="text" id="wl-name" name="first_name" placeholder="Your first name" required>
+          </div>
+          <div class="form-group">
+            <label for="wl-email">Email</label>
+            <input type="email" id="wl-email" name="email" placeholder="you@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="wl-province">Province</label>
+            <select id="wl-province" name="province">
+              <option value="">Select your province</option>
+              <option value="ontario">Ontario</option>
+              <option value="quebec">Quebec</option>
+              <option value="bc">British Columbia</option>
+              <option value="alberta">Alberta</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="wl-type">Which best describes you?</label>
+            <select id="wl-type" name="user_type">
+              <option value="">Select one</option>
+              <option value="unresolved">I have unresolved symptoms</option>
+              <option value="diagnosed">I have a diagnosis but want better monitoring</option>
+              <option value="provider">I'm a healthcare provider</option>
+              <option value="curious">Just curious</option>
+            </select>
+          </div>
+          <div class="checkbox-group">
+            <input type="checkbox" id="wl-consent" name="consent" required>
+            <label for="wl-consent">I agree to receive updates from Noeva Health</label>
+          </div>
+          <button type="submit" class="btn-submit">Join the Waitlist</button>
+          <p class="form-note">NOTE FOR EVE: Connect this form to your IONOS form handler or Mailchimp/ConvertKit.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SECTION 8: FOR CLINICIANS
+     ============================ -->
+<section class="clinicians section-padding" id="clinicians">
+  <div class="container">
+    <h2 class="section-title">For Healthcare Providers</h2>
+    <div class="clinicians-content">
+      <p>Noeva Health is building a diagnostic acceleration tool that helps your patients arrive better prepared. Our AI-powered platform organizes symptom histories, identifies patterns, and generates structured next steps &mdash; so your appointment time is spent advancing care, not reconstructing history. We're currently speaking with Nurse Practitioners, GPs, and gynecologists in Ontario.</p>
+      <a href="mailto:menezes@noevahealth.com" class="btn-clinician">Contact Us at menezes@noevahealth.com</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SECTION 9: CONTACT
+     ============================ -->
+<section class="contact section-padding" id="contact">
+  <div class="container">
+    <h2 class="section-title">Get in Touch</h2>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Contact Information</h3>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="12" rx="2" stroke="#1B8A8A" stroke-width="1.5"/><polyline points="2,4 10,11 18,4" stroke="#1B8A8A" stroke-width="1.5" fill="none"/></svg>
+          </div>
+          <div class="contact-item-text">
+            <a href="mailto:menezes@noevahealth.com">menezes@noevahealth.com</a>
+            <small>Email</small>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2C6.13 2 3 5.13 3 9c0 5.25 7 9 7 9s7-3.75 7-9c0-3.87-3.13-7-7-7z" stroke="#1B8A8A" stroke-width="1.5" fill="none"/><circle cx="10" cy="9" r="2.5" stroke="#1B8A8A" stroke-width="1.5"/></svg>
+          </div>
+          <div class="contact-item-text">
+            Ottawa, Ontario, Canada
+            <small>Location</small>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#1B8A8A" stroke-width="1.5"/><line x1="2" y1="10" x2="18" y2="10" stroke="#1B8A8A" stroke-width="1"/><ellipse cx="10" cy="10" rx="4" ry="8" stroke="#1B8A8A" stroke-width="1"/></svg>
+          </div>
+          <div class="contact-item-text">
+            noevahealth.com
+            <small>Website</small>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form-card">
+        <form onsubmit="event.preventDefault(); alert('This is a visual mockup. Connect to your IONOS form handler.');">
+          <div class="form-group">
+            <label for="c-name">Name</label>
+            <input type="text" id="c-name" name="name" placeholder="Your name" required>
+          </div>
+          <div class="form-group">
+            <label for="c-email">Email</label>
+            <input type="email" id="c-email" name="email" placeholder="you@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="c-message">Message</label>
+            <textarea id="c-message" name="message" placeholder="How can we help?" required></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     FOOTER
+     ============================ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 70" width="160" height="33">
+          <defs><linearGradient id="footer-g" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="rgba(255,255,255,0.8)"/><stop offset="50%" stop-color="rgba(255,255,255,0.6)"/><stop offset="100%" stop-color="#F0907A"/></linearGradient></defs>
+          <path d="M 38 58 C 20 54, 8 44, 8 34 C 8 20, 20 10, 36 10 C 52 10, 62 20, 62 34 C 62 44, 54 52, 42 56" fill="none" stroke="url(#footer-g)" stroke-width="4" stroke-linecap="round"/>
+          <text x="78" y="42" font-family="Poppins, sans-serif" font-weight="300" font-size="28" fill="rgba(255,255,255,0.85)" letter-spacing="1">Noeva</text>
+          <text x="185" y="42" font-family="Poppins, sans-serif" font-weight="500" font-size="28" fill="rgba(255,255,255,0.85)" letter-spacing="1">Health</text>
+        </svg>
+        <p class="footer-tagline">Her Health Discovered Sooner.</p>
+        <p class="footer-email"><a href="mailto:menezes@noevahealth.com">menezes@noevahealth.com</a></p>
+      </div>
+      <ul class="footer-links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#problem">The Problem</a></li>
+        <li><a href="#waitlist">Waitlist</a></li>
+        <li><a href="#clinicians">For Clinicians</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-disclaimer">Noeva Health is not a diagnostic tool. Always consult a healthcare professional.</p>
+      <p class="footer-copy">&copy; 2026 Noeva Health Inc. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================
+     MINIMAL JAVASCRIPT
+     ============================ -->
+<script>
+// Hamburger menu toggle
+(function() {
+  var hamburger = document.getElementById('hamburger');
+  var navLinks = document.getElementById('navLinks');
+
+  hamburger.addEventListener('click', function() {
+    navLinks.classList.toggle('open');
+    hamburger.classList.toggle('active');
+    hamburger.setAttribute('aria-expanded',
+      hamburger.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
+  });
+
+  // Close menu when a link is clicked
+  var links = navLinks.querySelectorAll('a');
+  for (var i = 0; i < links.length; i++) {
+    links[i].addEventListener('click', function() {
+      navLinks.classList.remove('open');
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+    });
+  }
+})();
+
+// Scroll animation observer
+(function() {
+  var elements = document.querySelectorAll('.animate-on-scroll');
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    elements.forEach(function(el) { observer.observe(el); });
+  } else {
+    // Fallback: show all immediately
+    elements.forEach(function(el) { el.classList.add('visible'); });
+  }
+})();
+</script>
+
+</body>
+</html>
