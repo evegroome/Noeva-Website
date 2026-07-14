@@ -901,6 +901,27 @@ a:hover { color: #E86B5A; }
   .section-padding { padding: 40px 0; }
   .animate-on-scroll { opacity: 1 !important; transform: none !important; }
 }
+   /* ---- SUPPORTED BY ---- */
+.supported-by { background: #fff; }
+.supporters-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 64px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+.supporter-logo img {
+  max-height: 70px;
+  width: auto;
+  filter: grayscale(100%);
+  opacity: 0.75;
+  transition: filter 0.2s, opacity 0.2s;
+}
+.supporter-logo img:hover {
+  filter: none;
+  opacity: 1;
+}
 </style>
 </head>
 <body>
@@ -1243,7 +1264,7 @@ a:hover { color: #E86B5A; }
     <h2 class="section-title">Supported By</h2>
     <div class="supporters-grid">
       <a href="https://www.company1.com" target="_blank" rel="noopener" class="supporter-logo animate-on-scroll">
-        <img src="images/company1-logo.png" alt="Company 1 name">
+        <img src="https://raw.githubusercontent.com/evegroome/Noeva-Website/main/iF-Logo_colour-1-300x118.webp" alt="Innovation Factory">
       </a>
       <a href="https://www.company2.com" target="_blank" rel="noopener" class="supporter-logo animate-on-scroll">
         <img src="images/company2-logo.png" alt="Company 2 name">
